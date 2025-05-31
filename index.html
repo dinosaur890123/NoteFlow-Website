@@ -10,215 +10,307 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Visualization & Content Choices: 
-        - Report Info: 5 core features (Notes, To-Do, Flashcards, Timer, Mindfulness) for a Windows app. 
-        - Goal: Allow users to understand and interact with each feature's mock-up directly on the page.
-        - Presentation Method: A responsive grid layout displaying individual sections for each feature. Each section contains a styled HTML/CSS mock-up.
-        - Interaction: To-Do list checkboxes update a progress bar. Flashcard flips on click. Timer/Mindfulness buttons trigger CSS animations. All interactions are self-contained within their feature section.
-        - Justification: Displaying all features at once caters to users who prefer a quick, comprehensive overview rather than clicking through tabs. The grid maintains organization.
-        - Library/Method: Vanilla JS for individual feature interactions.
+        - Report Info: Core app features (Notes, To-Do, etc.) presented on the "Home" page. New placeholder sections for "Pricing", "About", and "Gallery". Pricing updated to $5 and "Coming Soon".
+        - Goal: Allow navigation between different informational sections of the website.
+        - Presentation Method: Main content area dynamically shows one "page" section at a time. Navigation bar with hash links.
+        - Interaction: Clicking nav links changes URL hash and triggers JS to display the corresponding page section. Existing feature interactions on the "Home" page remain. Purchase buttons are now "Coming Soon".
+        - Justification: Hash routing is simple for SPAs on static hosts like GitHub Pages. It provides clear separation of content sections.
+        - Library/Method: Vanilla JS for routing. Chart.js for chart on "Home" page.
 
-        - Report Info: NoteFlow (Windows app) is better than multiple, scattered apps.
-        - Goal: Visually compare the old method vs. the NoteFlow method with a modern aesthetic.
-        - Presentation Method: Horizontal stacked bar chart with updated styling.
-        - Interaction: Static but dynamically rendered, visually compelling.
-        - Justification: Chart offers quick, data-driven proof of efficiency, enhanced by modern visuals.
+        - Report Info: NoteFlow (Windows app) is better than multiple, scattered apps (Chart on "Home" page).
+        - Goal: Visually compare old vs. NoteFlow method.
+        - Presentation Method: Horizontal stacked bar chart with modern styling.
+        - Interaction: Static but dynamically rendered.
+        - Justification: Chart offers quick, data-driven proof of efficiency.
         - Library/Method: Chart.js on canvas.
     -->
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; } /* Slightly lighter body background */
-        .feature-section { background-color: #ffffff; border-radius: 0.75rem; padding: 2rem; box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05), 0 4px 8px -6px rgba(0, 0, 0, 0.05); margin-bottom: 2rem; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; scroll-behavior: smooth; }
+        .page-content { display: none; animation: fadeIn 0.6s ease-out; } /* Slightly longer fadeIn for smoothness */
+        .page-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .nav-link { padding: 0.5rem 1rem; border-radius: 0.375rem; transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out; font-weight: 500; }
+        .nav-link.active { background-color: #4f46e5; color: #ffffff; } /* Indigo */
+        .nav-link:not(.active):hover { background-color: #e0e7ff; color: #3730a3; }
+
+
+        .feature-section { background-color: #ffffff; border-radius: 0.75rem; padding: 2rem; box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05), 0 4px 8px -6px rgba(0, 0, 0, 0.05); margin-bottom: 2rem; transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; }
+        .feature-section:hover { transform: translateY(-5px); box-shadow: 0 15px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.06); }
+
         .flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1); transform-style: preserve-3d; }
         .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
         .flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 1.5rem; border-radius: 0.75rem; }
         .flashcard-front { background-color: #f4f6f8; color: #1f2937; border: 1px solid #e1e5e9; }
-        .flashcard-back { background-color: #e0e7ff; color: #3730a3; transform: rotateY(180deg); border: 1px solid #c7d2fe; } /* Softer blue for flashcard back */
-        .breathing-circle { width: 100px; height: 100px; border-radius: 50%; background-color: #6366f1; /* Indigo */ transition: all 2.5s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
+        .flashcard-back { background-color: #e0e7ff; color: #3730a3; transform: rotateY(180deg); border: 1px solid #c7d2fe; }
+        
+        .breathing-circle { width: 100px; height: 100px; border-radius: 50%; background-color: #6366f1; transition: all 2.5s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
         .breathing-circle.breathing { animation: breathe 5s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite; }
         @keyframes breathe { 0%, 100% { transform: scale(0.95); opacity: 0.6; } 50% { transform: scale(1.2); opacity: 1; } }
+        
         .chart-container { position: relative; width: 100%; max-width: 750px; margin-left: auto; margin-right: auto; height: 380px; max-height: 450px; padding: 1.5rem; background-color: #ffffff; border-radius: 0.75rem; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05), 0 4px 8px -6px rgba(0,0,0,0.05); }
         @media (min-width: 768px) { .chart-container { height: 420px; } }
-        .btn-primary { background-color: #4f46e5; /* Indigo */ color: #ffffff; font-semibold; padding-top: 0.875rem; padding-bottom: 0.875rem; padding-left: 2.25rem; padding-right: 2.25rem; border-radius: 0.5rem; text-lg; transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; box-shadow: 0 4px 10px -2px rgba(79, 70, 229, 0.4), 0 2px 6px -2px rgba(79, 70, 229, 0.3); }
-        .btn-primary:hover { background-color: #4338ca; /* Darker Indigo */ box-shadow: 0 10px 20px -3px rgba(79, 70, 229, 0.5), 0 4px 8px -2px rgba(79, 70, 229, 0.4); transform: translateY(-2px); }
-        .section-title { font-size: 2.25rem; line-height: 2.5rem; font-weight: 800; letter-spacing: -0.025em; color: #1f2937; margin-bottom: 0.75rem; } /* Slightly larger section titles */
+        
+        .btn-primary { background-color: #4f46e5; color: #ffffff; font-semibold; padding-top: 0.875rem; padding-bottom: 0.875rem; padding-left: 2.25rem; padding-right: 2.25rem; border-radius: 0.5rem; text-lg; transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; box-shadow: 0 4px 10px -2px rgba(79, 70, 229, 0.4), 0 2px 6px -2px rgba(79, 70, 229, 0.3); }
+        .btn-primary:hover { background-color: #4338ca; box-shadow: 0 10px 20px -3px rgba(79, 70, 229, 0.5), 0 4px 8px -2px rgba(79, 70, 229, 0.4); transform: translateY(-2px); }
+        
+        .btn-coming-soon { background-color: #9ca3af; color: #e5e7eb; font-semibold; padding-top: 0.875rem; padding-bottom: 0.875rem; padding-left: 2.25rem; padding-right: 2.25rem; border-radius: 0.5rem; text-lg; cursor: not-allowed; opacity: 0.7; }
+        .btn-coming-soon-lg { background-color: #9ca3af; color: #e5e7eb; font-bold; padding-top: 1rem; padding-bottom: 1rem; padding-left: 3rem; padding-right: 3rem; border-radius: 0.5rem; font-size: 1.25rem; line-height: 1.75rem; cursor: not-allowed; opacity: 0.7; }
+
+
+        .section-title { font-size: 2.25rem; line-height: 2.5rem; font-weight: 800; letter-spacing: -0.025em; color: #1f2937; margin-bottom: 0.75rem; }
         .section-subtitle { font-size: 1.125rem; line-height: 1.75rem; color: #4b5563; max-width: 48rem; margin-left:auto; margin-right:auto; margin-bottom: 3rem; }
+        .page-title { font-size: 2.5rem; line-height: 2.75rem; font-weight: 700; color: #1a202c; margin-bottom: 1rem; text-align: center;}
+        .page-text { font-size: 1.125rem; line-height: 1.75rem; color: #4a5568; margin-bottom: 2rem; text-align: center; max-width: 3xl; margin-left: auto; margin-right: auto;}
+
     </style>
 </head>
 <body class="text-gray-800 antialiased">
 
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <header class="text-center py-16 md:py-24">
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-gray-900">
-                Ditch the Study Chaos.
-                <span class="block text-indigo-600">Unleash Your Genius with NoteFlow.</span>
-            </h1>
-            <p class="text-base font-semibold uppercase tracking-wider text-indigo-500 mb-6">Exclusively for Windows</p>
-            <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-700 mb-12">
-                Is your brain drowning in scattered notes and endless to-do lists? It's time to stop surviving your studies and start conquering them. NoteFlow is the all-in-one Windows command center for academic victory.
-            </p>
-            <a href="#purchase" class="btn-primary">
-                Get NoteFlow - One-Time Purchase
-            </a>
-        </header>
-
-        <main>
-            <section id="features-showcase" class="py-16 md:py-20">
-                <div class="text-center mb-16">
-                    <h2 class="section-title">Your Integrated Academic Toolkit</h2>
-                    <p class="section-subtitle">Explore how NoteFlow replaces clutter with clarity on your Windows PC. All features, one powerful app.</p>
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-2xl font-bold text-indigo-600 hover:text-indigo-700 transition-colors">NoteFlow</a>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                    
-                    <div id="notes-feature" class="feature-section flex flex-col">
-                        <div class="mb-4 text-3xl">🗒️</div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Unmatched Note Organization</h3>
-                        <p class="text-gray-600 mb-6 flex-grow">Say goodbye to messy files. Structure notes by subject and topic, finding anything in seconds.</p>
-                        <div class="bg-slate-100 p-6 rounded-lg border border-slate-200 shadow-sm mt-auto">
-                            <ul class="space-y-2">
-                                <li class="font-semibold text-lg text-slate-700">▾ Subjects</li>
-                                <ul class="pl-6 space-y-1 text-slate-600">
-                                    <li class="bg-indigo-100 p-3 rounded-md font-semibold text-indigo-700">▾ Mathematics</li>
-                                    <ul class="pl-6 pt-2 space-y-1.5">
-                                        <li class="p-2 rounded-md hover:bg-slate-200 transition-colors">Algebra</li>
-                                        <li class="p-2 rounded-md hover:bg-slate-200 transition-colors">Calculus</li>
-                                        <li class="p-2 rounded-md hover:bg-slate-200 transition-colors">Statistics</li>
-                                    </ul>
-                                    <li class="font-semibold p-3 rounded-md mt-1 hover:bg-slate-200 transition-colors">▾ History</li>
-                                </ul>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div id="todos-feature" class="feature-section flex flex-col">
-                        <div class="mb-4 text-3xl">✅</div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-800">A To-Do List That Works</h3>
-                        <p class="text-gray-600 mb-6 flex-grow">Break down projects, track progress, and never miss a deadline. Watch the bar update!</p>
-                        <div class="mt-auto">
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Project Progress</label>
-                                <div class="w-full bg-gray-200 rounded-full h-5">
-                                    <div id="progress-bar" class="bg-indigo-500 h-5 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
-                                </div>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
-                                    <label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500"><span class="ml-3 text-gray-700">History Essay</span></label>
-                                    <div class="pl-8 mt-1 text-xs space-y-1">
-                                        <label class="flex items-center"><input type="checkbox" class="todo-item h-4 w-4 rounded"><span class="ml-2 text-gray-500">Research</span></label>
-                                        <label class="flex items-center"><input type="checkbox" class="todo-item h-4 w-4 rounded"><span class="ml-2 text-gray-500">Outline</span></label>
-                                    </div>
-                                </div>
-                                <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
-                                     <label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded"><span class="ml-3 text-gray-700">Calculus Exam Prep</span></label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="flashcards-feature" class="feature-section flex flex-col">
-                        <div class="mb-4 text-3xl">🧠</div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Revision on Autopilot</h3>
-                         <p class="text-gray-600 mb-6 flex-grow">Turn notes into revision tools. Create flashcards to lock in concepts. Click to flip!</p>
-                         <div id="flashcard-demo" class="flashcard h-56 w-full max-w-sm mx-auto cursor-pointer perspective-1000 mt-auto">
-                            <div class="flashcard-inner">
-                                <div class="flashcard-front shadow-md">
-                                    <p class="text-gray-500 text-xs mb-2 uppercase tracking-wider">Subject: CompSci</p>
-                                    <h4 class="text-lg font-semibold">CPU Primary Function?</h4>
-                                </div>
-                                <div class="flashcard-back shadow-md">
-                                    <h4 class="text-lg font-semibold">Execute program instructions.</h4>
-                                </div>
-                            </div>
-                         </div>
-                    </div>
-
-                    <div id="timer-feature" class="feature-section flex flex-col">
-                        <div class="mb-4 text-3xl">⏱️</div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Harness Deep Focus</h3>
-                        <p class="text-gray-600 mb-6 flex-grow">Use the Pomodoro Technique for focused sprints. Eliminate distractions, get more done.</p>
-                        <div class="text-center bg-slate-100 p-6 rounded-xl border border-slate-200 shadow-sm mt-auto">
-                            <div id="pomodoro-display" class="text-5xl font-bold text-indigo-600 mb-3 tabular-nums">25:00</div>
-                            <p id="pomodoro-status" class="text-gray-600 mb-4 text-sm">Ready to focus?</p>
-                            <button id="pomodoro-btn" class="bg-indigo-600 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Start Focus</button>
-                        </div>
-                    </div>
-
-                    <div id="mindfulness-feature" class="feature-section flex flex-col col-span-1 md:col-span-2 lg:col-span-1">
-                        <div class="mb-4 text-3xl">🧘</div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Find Your Calm Center</h3>
-                        <p class="text-gray-600 mb-6 flex-grow">Academic pressure is real. Reset with a simple breathing exercise. Your brain will thank you.</p>
-                         <div class="text-center bg-slate-100 p-6 rounded-xl border border-slate-200 shadow-sm mt-auto flex flex-col items-center justify-center min-h-[240px]">
-                            <div id="breathing-circle" class="breathing-circle mb-6"></div>
-                            <p id="breathing-text" class="text-gray-600 mb-5 text-sm">Inhale... Exhale...</p>
-                            <button id="mindfulness-btn" class="bg-indigo-600 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Begin Breathing</button>
-                         </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" data-page-link="home" class="nav-link">Home</a>
+                        <a href="#pricing" data-page-link="pricing" class="nav-link">Pricing</a>
+                        <a href="#about" data-page-link="about" class="nav-link">About</a>
+                        <a href="#gallery" data-page-link="gallery" class="nav-link">Gallery</a>
                     </div>
                 </div>
-            </section>
-            
-            <section id="benefits" class="py-16 md:py-20 bg-white rounded-xl shadow-lg my-16">
-                <div class="text-center mb-12 px-6">
-                    <h2 class="section-title">The NoteFlow Advantage</h2>
-                     <p class="section-subtitle">It's more than just features. It's about building a better study system for your Windows setup.</p>
+                <div class="md:hidden">
+                     <button id="mobile-menu-button" class="text-gray-700 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 p-2 rounded-md">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
                 </div>
-                <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-x-8 gap-y-12 text-center px-6">
-                    <div class="p-6 hover:shadow-xl transition-shadow duration-300 rounded-lg">
-                        <div class="text-5xl mb-5 text-indigo-500">🚀</div>
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Study Smarter, Not Harder</h3>
-                        <p class="text-gray-600 text-base">An integrated workflow means less time switching between apps and more time learning.</p>
-                    </div>
-                    <div class="p-6 hover:shadow-xl transition-shadow duration-300 rounded-lg">
-                        <div class="text-5xl mb-5 text-indigo-500">💡</div>
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Gain Deeper Understanding</h3>
-                        <p class="text-gray-600 text-base">Connect your notes, tasks, and revision to see the big picture and reinforce knowledge.</p>
-                    </div>
-                    <div class="p-6 hover:shadow-xl transition-shadow duration-300 rounded-lg">
-                        <div class="text-5xl mb-5 text-indigo-500">🧘</div>
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Reduce Stress & Overwhelm</h3>
-                        <p class="text-gray-600 text-base">Feel in complete control of your academic life with a system that keeps everything organized.</p>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="comparison" class="py-16 md:py-20">
-                 <div class="text-center mb-12 px-6">
-                    <h2 class="section-title">Stop Juggling. Start Integrating.</h2>
-                    <p class="section-subtitle">See how a typical study day changes with NoteFlow. More time focusing, less time wasted.</p>
-                </div>
-                <div class="chart-container">
-                    <canvas id="studyChart"></canvas>
-                </div>
-            </section>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="#home" data-page-link="home" class="block nav-link text-center py-3 border-b hover:bg-indigo-50">Home</a>
+            <a href="#pricing" data-page-link="pricing" class="block nav-link text-center py-3 border-b hover:bg-indigo-50">Pricing</a>
+            <a href="#about" data-page-link="about" class="block nav-link text-center py-3 border-b hover:bg-indigo-50">About</a>
+            <a href="#gallery" data-page-link="gallery" class="block nav-link text-center py-3 hover:bg-indigo-50">Gallery</a>
+        </div>
+    </nav>
 
-            <section id="purchase" class="text-center py-20 md:py-28 bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-xl mt-20 shadow-2xl">
-                 <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-5 text-white">
-                    Ready to Elevate Your Studies on Windows?
-                </h2>
-                <p class="max-w-3xl mx-auto text-lg md:text-xl text-indigo-100 mb-10 px-6">
-                    Invest in your academic future. Get lifetime access to every feature with a simple, one-time purchase. No subscriptions. No hidden fees.
+    <div id="page-container" class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <section id="home" class="page-content">
+            <header class="text-center py-12 md:py-16">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-gray-900">
+                    Ditch the Study Chaos.
+                    <span class="block text-indigo-600">Unleash Your Genius with NoteFlow.</span>
+                </h1>
+                <p class="text-base font-semibold uppercase tracking-wider text-indigo-500 mb-6">Exclusively for Windows</p>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-700 mb-12">
+                    Is your brain drowning in scattered notes and endless to-do lists? It's time to stop surviving your studies and start conquering them. NoteFlow is the all-in-one Windows command center for academic victory.
                 </p>
-                <a href="#" class="bg-white text-indigo-600 font-bold py-4 px-12 rounded-lg text-xl hover:bg-gray-100 transition duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                    Buy NoteFlow for Windows Now
-                </a>
-                 <p class="text-indigo-200 mt-8 text-sm">NoteFlow is exclusively designed for Windows.</p>
-            </section>
-        </main>
-        <footer class="text-center py-12 mt-16 border-t border-gray-200">
-            <p class="text-gray-500 text-sm">&copy; <span id="currentYear"></span> NoteFlow. All rights reserved. The Ultimate Study App for Windows.</p>
-        </footer>
+                <button id="main-cta-button" class="btn-coming-soon">NoteFlow - Coming Soon!</button>
+            </header>
+
+            <main>
+                <section id="features-showcase" class="py-12 md:py-16">
+                    <div class="text-center mb-16">
+                        <h2 class="section-title">Your Integrated Academic Toolkit</h2>
+                        <p class="section-subtitle">Explore how NoteFlow replaces clutter with clarity on your Windows PC. All features, one powerful app.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                        <div id="notes-feature" class="feature-section flex flex-col">
+                            <div class="mb-4 text-3xl">🗒️</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Unmatched Note Organization</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Say goodbye to messy files. Structure notes by subject and topic, finding anything in seconds.</p>
+                            <div class="bg-slate-100 p-6 rounded-lg border border-slate-200 shadow-sm mt-auto">
+                                <ul class="space-y-2"><li class="font-semibold text-lg text-slate-700">▾ Subjects</li>
+                                    <ul class="pl-6 space-y-1 text-slate-600"><li class="bg-indigo-100 p-3 rounded-md font-semibold text-indigo-700">▾ Mathematics</li>
+                                        <ul class="pl-6 pt-2 space-y-1.5"><li class="p-2 rounded-md hover:bg-slate-200 transition-colors">Algebra</li><li class="p-2 rounded-md hover:bg-slate-200 transition-colors">Calculus</li><li class="p-2 rounded-md hover:bg-slate-200 transition-colors">Statistics</li></ul>
+                                    <li class="font-semibold p-3 rounded-md mt-1 hover:bg-slate-200 transition-colors">▾ History</li></ul>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="todos-feature" class="feature-section flex flex-col">
+                            <div class="mb-4 text-3xl">✅</div><h3 class="text-2xl font-bold mb-3 text-gray-800">A To-Do List That Works</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Break down projects, track progress, and never miss a deadline. Watch the bar update!</p>
+                            <div class="mt-auto"><div class="mb-4"><label class="block text-sm font-medium text-gray-700 mb-1">Project Progress</label><div class="w-full bg-gray-200 rounded-full h-5"><div id="progress-bar" class="bg-indigo-500 h-5 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div></div></div>
+                                <div class="space-y-3"><div class="bg-slate-50 p-3 rounded-lg border border-slate-200"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500"><span class="ml-3 text-gray-700">History Essay</span></label><div class="pl-8 mt-1 text-xs space-y-1"><label class="flex items-center"><input type="checkbox" class="todo-item h-4 w-4 rounded"><span class="ml-2 text-gray-500">Research</span></label><label class="flex items-center"><input type="checkbox" class="todo-item h-4 w-4 rounded"><span class="ml-2 text-gray-500">Outline</span></label></div></div>
+                                <div class="bg-slate-50 p-3 rounded-lg border border-slate-200"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded"><span class="ml-3 text-gray-700">Calculus Exam Prep</span></label></div></div>
+                            </div>
+                        </div>
+                        <div id="flashcards-feature" class="feature-section flex flex-col">
+                            <div class="mb-4 text-3xl">🧠</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Revision on Autopilot</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Turn notes into revision tools. Create flashcards to lock in concepts. Click to flip!</p>
+                            <div id="flashcard-demo" class="flashcard h-56 w-full max-w-sm mx-auto cursor-pointer perspective-1000 mt-auto"><div class="flashcard-inner"><div class="flashcard-front shadow-md"><p class="text-gray-500 text-xs mb-2 uppercase tracking-wider">Subject: CompSci</p><h4 class="text-lg font-semibold">CPU Primary Function?</h4></div><div class="flashcard-back shadow-md"><h4 class="text-lg font-semibold">Execute program instructions.</h4></div></div></div>
+                        </div>
+                        <div id="timer-feature" class="feature-section flex flex-col">
+                            <div class="mb-4 text-3xl">⏱️</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Harness Deep Focus</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Use the Pomodoro Technique for focused sprints. Eliminate distractions, get more done.</p>
+                            <div class="text-center bg-slate-100 p-6 rounded-xl border border-slate-200 shadow-sm mt-auto"><div id="pomodoro-display" class="text-5xl font-bold text-indigo-600 mb-3 tabular-nums">25:00</div><p id="pomodoro-status" class="text-gray-600 mb-4 text-sm">Ready to focus?</p><button id="pomodoro-btn" class="bg-indigo-600 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Start Focus</button></div>
+                        </div>
+                        <div id="mindfulness-feature" class="feature-section flex flex-col col-span-1 md:col-span-2 lg:col-span-1">
+                             <div class="mb-4 text-3xl">🧘</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Find Your Calm Center</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Academic pressure is real. Reset with a simple breathing exercise. Your brain will thank you.</p>
+                            <div class="text-center bg-slate-100 p-6 rounded-xl border border-slate-200 shadow-sm mt-auto flex flex-col items-center justify-center min-h-[240px]"><div id="breathing-circle" class="breathing-circle mb-6"></div><p id="breathing-text" class="text-gray-600 mb-5 text-sm">Inhale... Exhale...</p><button id="mindfulness-btn" class="bg-indigo-600 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Begin Breathing</button></div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="benefits" class="py-12 md:py-16 bg-white rounded-xl shadow-lg my-12">
+                    <div class="text-center mb-12 px-6"><h2 class="section-title">The NoteFlow Advantage</h2><p class="section-subtitle">It's more than just features. It's about building a better study system for your Windows setup.</p></div>
+                    <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-x-8 gap-y-12 text-center px-6">
+                        <div class="p-6 hover:shadow-xl transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500">🚀</div><h3 class="text-xl font-semibold mb-2 text-gray-800">Study Smarter, Not Harder</h3><p class="text-gray-600 text-base">An integrated workflow means less time switching between apps and more time learning.</p></div>
+                        <div class="p-6 hover:shadow-xl transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500">💡</div><h3 class="text-xl font-semibold mb-2 text-gray-800">Gain Deeper Understanding</h3><p class="text-gray-600 text-base">Connect your notes, tasks, and revision to see the big picture and reinforce knowledge.</p></div>
+                        <div class="p-6 hover:shadow-xl transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500">🧘</div><h3 class="text-xl font-semibold mb-2 text-gray-800">Reduce Stress & Overwhelm</h3><p class="text-gray-600 text-base">Feel in complete control of your academic life with a system that keeps everything organized.</p></div>
+                    </div>
+                </section>
+                
+                <section id="comparison" class="py-12 md:py-16">
+                     <div class="text-center mb-12 px-6"><h2 class="section-title">Stop Juggling. Start Integrating.</h2><p class="section-subtitle">See how a typical study day changes with NoteFlow. More time focusing, less time wasted.</p></div>
+                    <div class="chart-container"><canvas id="studyChart"></canvas></div>
+                </section>
+
+                <section id="purchase-section" class="text-center py-16 md:py-24 bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-xl mt-16 shadow-2xl">
+                     <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-5 text-white">Ready to Elevate Your Studies on Windows?</h2>
+                    <p class="max-w-3xl mx-auto text-lg md:text-xl text-indigo-100 mb-10 px-6">Invest in your academic future. Get lifetime access to every feature with a simple, one-time purchase. No subscriptions. No hidden fees.</p>
+                     <button class="btn-coming-soon-lg">NoteFlow - Coming Soon!</button>
+                     <p class="text-indigo-200 mt-8 text-sm">NoteFlow is exclusively designed for Windows.</p>
+                </section>
+            </main>
+        </section>
+
+        <section id="pricing" class="page-content py-10">
+            <div class="max-w-4xl mx-auto px-4">
+                <h2 class="page-title">NoteFlow Pricing</h2>
+                <p class="page-text">
+                    Unlock all the powerful features of NoteFlow with a simple, one-time purchase. No subscriptions, no recurring fees – just lifetime access to your ultimate study companion for Windows.
+                </p>
+                <div class="bg-white p-8 md:p-12 rounded-xl shadow-xl max-w-md mx-auto text-center border border-indigo-200">
+                    <h3 class="text-3xl font-bold text-indigo-600 mb-2">NoteFlow Pro</h3>
+                    <p class="text-gray-500 text-lg mb-6">Lifetime Access</p>
+                    <p class="text-6xl font-extrabold text-gray-800 mb-6">$5<span class="text-2xl font-normal text-gray-500">.00</span></p>
+                    <p class="text-gray-600 mb-8">One-time payment. All features included. Future updates free.</p>
+                    <ul class="text-left space-y-3 text-gray-700 mb-10">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Organized Notes (Subjects & Topics)</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Sophisticated To-Do List</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Flashcards for Revision</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Pomodoro Study Timer</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Mindfulness Breathing Exercises</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Exclusively for Windows</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Lifetime Updates</li>
+                    </ul>
+                    <button class="w-full btn-coming-soon text-lg">Coming Soon!</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="page-content py-10">
+             <div class="max-w-4xl mx-auto px-4">
+                <h2 class="page-title">About NoteFlow</h2>
+                <div class="bg-white p-8 md:p-10 rounded-xl shadow-xl text-gray-700 space-y-6 text-lg leading-relaxed">
+                    <p>
+                        NoteFlow was born from a simple idea: studying should be organized, focused, and less stressful. As students ourselves, we juggled countless apps – one for notes, another for to-do lists, separate timers, and flashcard apps. It was chaotic and inefficient.
+                    </p>
+                    <p>
+                        We envisioned a single, powerful application specifically for Windows users that integrates all essential study tools into one seamless experience. NoteFlow is the result of that vision.
+                    </p>
+                    <p>
+                        Our mission is to empower students like you to achieve academic success by providing a tool that not only helps you manage your workload but also promotes better study habits and well-being. We believe that with the right tools, anyone can unlock their full academic potential.
+                    </p>
+                    <p>
+                        NoteFlow is built with care, focusing on a clean interface, robust features, and the promise of a one-time purchase for lifetime value. We're committed to continuously improving NoteFlow and supporting our community of learners.
+                    </p>
+                    <p class="font-semibold text-indigo-600 mt-8">Thank you for choosing NoteFlow!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="page-content py-10">
+            <div class="max-w-4xl mx-auto px-4">
+                <h2 class="page-title">NoteFlow Gallery</h2>
+                <p class="page-text">
+                    Welcome to the NoteFlow Gallery! This section will soon showcase screenshots and visuals of the NoteFlow application in action. Check back soon for a closer look at how NoteFlow can transform your study experience on Windows.
+                </p>
+                <div class="bg-white p-8 md:p-12 rounded-xl shadow-xl text-center">
+                    <p class="text-2xl text-gray-500">🖼️ Gallery Content Coming Soon! 🖼️</p>
+                </div>
+            </div>
+        </section>
+
     </div>
+
+    <footer class="text-center py-12 mt-8 border-t border-gray-200">
+        <p class="text-gray-500 text-sm">&copy; <span id="currentYear"></span> NoteFlow. All rights reserved. The Ultimate Study App for Windows.</p>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            const pageLinks = document.querySelectorAll('[data-page-link]');
+            const pageContents = document.querySelectorAll('.page-content');
+            const mainCtaButton = document.getElementById('main-cta-button');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            function showPage(pageId) {
+                pageContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+
+                window.scrollTo(0, 0); 
+            }
+
+            function handleRouteChange() {
+                let hash = window.location.hash.substring(1);
+                if (!hash || !document.getElementById(hash)) { // Fallback to home if hash is empty or invalid
+                    hash = 'home'; 
+                    window.location.hash = '#home'; // Optionally update URL to reflect fallback
+                }
+                showPage(hash);
+            }
+
+            pageLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    // Let the hashchange event handle page switching
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+            
+            // Main CTA button on home page is now a "Coming Soon" button, so no special scroll logic needed.
+            // It will just be a disabled-looking button.
+
+            window.addEventListener('hashchange', handleRouteChange);
+            handleRouteChange(); 
+
 
             const todoItems = document.querySelectorAll('.todo-item');
             const progressBar = document.getElementById('progress-bar');
             
             function updateProgress() {
                 const totalTodos = todoItems.length;
-                if (totalTodos === 0) return;
+                if (totalTodos === 0 || !progressBar) return; 
                 const checkedTodos = document.querySelectorAll('.todo-item:checked').length;
                 const percentage = (checkedTodos / totalTodos) * 100;
                 progressBar.style.width = `${percentage}%`;
@@ -231,9 +323,7 @@
             
             const flashcardDemo = document.getElementById('flashcard-demo');
             if (flashcardDemo) {
-                flashcardDemo.addEventListener('click', function() {
-                    this.classList.toggle('flipped');
-                });
+                flashcardDemo.addEventListener('click', function() { this.classList.toggle('flipped'); });
             }
             
             const pomodoroBtn = document.getElementById('pomodoro-btn');
@@ -247,26 +337,24 @@
                 pomodoroBtn.addEventListener('click', () => {
                     if (isPomodoroRunning) {
                         clearInterval(pomodoroInterval);
-                        pomodoroStatus.textContent = 'Session paused.';
-                        pomodoroBtn.textContent = 'Resume Focus';
+                        if(pomodoroStatus) pomodoroStatus.textContent = 'Session paused.';
+                        if(pomodoroBtn) pomodoroBtn.textContent = 'Resume Focus';
                         isPomodoroRunning = false;
                     } else {
                         isPomodoroRunning = true;
-                        pomodoroBtn.textContent = 'Pause Session';
-                        pomodoroStatus.textContent = 'Focus time!';
-                        
+                        if(pomodoroBtn) pomodoroBtn.textContent = 'Pause Session';
+                        if(pomodoroStatus) pomodoroStatus.textContent = 'Focus time!';
                         pomodoroInterval = setInterval(() => {
                             let minutes = parseInt(pomodoroDuration / 60, 10);
                             let seconds = parseInt(pomodoroDuration % 60, 10);
                             minutes = minutes < 10 ? "0" + minutes : minutes;
                             seconds = seconds < 10 ? "0" + seconds : seconds;
-                            pomodoroDisplay.textContent = minutes + ":" + seconds;
-                            
+                            if (pomodoroDisplay) pomodoroDisplay.textContent = minutes + ":" + seconds;
                             if (--pomodoroDuration < 0) {
                                 clearInterval(pomodoroInterval);
-                                pomodoroDisplay.textContent = "🎉 Done!";
-                                pomodoroStatus.textContent = "Great work! Time for a break.";
-                                pomodoroBtn.textContent = 'Start New Session';
+                                if (pomodoroDisplay) pomodoroDisplay.textContent = "🎉 Done!";
+                                if (pomodoroStatus) pomodoroStatus.textContent = "Great work! Time for a break.";
+                                if (pomodoroBtn) pomodoroBtn.textContent = 'Start New Session';
                                 pomodoroDuration = 25 * 60; 
                                 isPomodoroRunning = false; 
                             }
@@ -281,92 +369,33 @@
             
             if (mindfulnessBtn) {
                 mindfulnessBtn.addEventListener('click', () => {
-                    breathingCircle.classList.toggle('breathing');
-                    const isBreathing = breathingCircle.classList.contains('breathing');
-                    mindfulnessBtn.textContent = isBreathing ? 'Stop Breathing' : 'Begin Breathing';
-                    breathingText.textContent = isBreathing ? 'Follow the rhythm... Inhale... Exhale...' : 'Ready when you are.';
+                    if (breathingCircle) breathingCircle.classList.toggle('breathing');
+                    const isBreathing = breathingCircle ? breathingCircle.classList.contains('breathing') : false;
+                    if(mindfulnessBtn) mindfulnessBtn.textContent = isBreathing ? 'Stop Breathing' : 'Begin Breathing';
+                    if (breathingText) breathingText.textContent = isBreathing ? 'Follow the rhythm... Inhale... Exhale...' : 'Ready when you are.';
                 });
             }
 
-            const ctx = document.getElementById('studyChart').getContext('2d');
-            const studyChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Scattered Apps Method', 'The NoteFlow Method'],
-                    datasets: [{
-                        label: 'Focused Study Time',
-                        data: [60, 90],
-                        backgroundColor: 'rgba(79, 70, 229, 0.8)', // Indigo with opacity
-                        borderColor: 'rgba(79, 70, 229, 1)',
-                        borderWidth: 1.5,
-                        borderRadius: 6,
-                        borderSkipped: false,
-                    }, {
-                        label: 'Time Wasted',
-                        data: [40, 10],
-                        backgroundColor: 'rgba(239, 68, 68, 0.7)', // Red with opacity
-                        borderColor: 'rgba(239, 68, 68, 1)',
-                        borderWidth: 1.5,
-                        borderRadius: 6,
-                        borderSkipped: false,
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            stacked: true,
-                            title: { display: true, text: 'Percentage of Study Time (%)', font: {size: 13, weight: '500'}, color: '#4b5563', padding: {top: 10} },
-                            grid: { display: false, drawBorder: false },
-                            ticks: { font: {size: 12}, color: '#6b7280', padding: 5}
-                        },
-                        y: {
-                            stacked: true,
-                            grid: { color: '#e5e7eb', borderDash: [3, 3] }, // Dashed grid lines
-                            ticks: { font: {size: 13, weight: '500'}, color: '#374151', padding: 10}
-                        }
+            const chartCanvas = document.getElementById('studyChart');
+            if (chartCanvas) { 
+                const ctx = chartCanvas.getContext('2d');
+                const studyChart = new Chart(ctx, {
+                    type: 'bar', data: { labels: ['Scattered Apps Method', 'The NoteFlow Method'],
+                        datasets: [{ label: 'Focused Study Time', data: [60, 90], backgroundColor: 'rgba(79, 70, 229, 0.8)', borderColor: 'rgba(79, 70, 229, 1)', borderWidth: 1.5, borderRadius: 6, borderSkipped: false, },
+                                   { label: 'Time Wasted', data: [40, 10], backgroundColor: 'rgba(239, 68, 68, 0.7)', borderColor: 'rgba(239, 68, 68, 1)', borderWidth: 1.5, borderRadius: 6, borderSkipped: false, }]
                     },
-                    plugins: {
-                        tooltip: {
-                            backgroundColor: '#1f2937',
-                            titleFont: { size: 14, weight: '600' },
-                            bodyFont: { size: 12 },
-                            padding: 12,
-                            cornerRadius: 6,
-                            displayColors: false,
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: ${context.raw}%`;
-                                }
-                            }
+                    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+                        scales: { x: { stacked: true, title: { display: true, text: 'Percentage of Study Time (%)', font: {size: 13, weight: '500'}, color: '#4b5563', padding: {top: 10} }, grid: { display: false, drawBorder: false }, ticks: { font: {size: 12}, color: '#6b7280', padding: 5} },
+                                  y: { stacked: true, grid: { color: '#e5e7eb', borderDash: [3, 3] }, ticks: { font: {size: 13, weight: '500'}, color: '#374151', padding: 10} }
                         },
-                        title: {
-                            display: true,
-                            text: 'Typical Study Session Efficiency (Windows)',
-                            font: { size: 18, weight: '700' },
-                            color: '#1f2937',
-                            padding: { top: 5, bottom: 25 }
+                        plugins: { tooltip: { backgroundColor: '#1f2937', titleFont: { size: 14, weight: '600' }, bodyFont: { size: 12 }, padding: 12, cornerRadius: 6, displayColors: false, callbacks: { label: function(context) { return `${context.dataset.label}: ${context.raw}%`; } } },
+                                   title: { display: true, text: 'Typical Study Session Efficiency (Windows)', font: { size: 18, weight: '700' }, color: '#1f2937', padding: { top: 5, bottom: 25 } },
+                                   legend: { position: 'bottom', labels: { font: {size: 13}, color: '#4b5563', padding: 25, usePointStyle: true, pointStyle: 'rectRounded' } }
                         },
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                font: {size: 13},
-                                color: '#4b5563',
-                                padding: 25,
-                                usePointStyle: true,
-                                pointStyle: 'rectRounded'
-                            }
-                        }
-                    },
-                    layout: {
-                        padding: {
-                            top: 5, bottom: 5, left: 5, right: 5 
-                        }
+                        layout: { padding: { top: 5, bottom: 5, left: 5, right: 5 } }
                     }
-                }
-            });
+                });
+            }
         });
     </script>
 </body>
