@@ -22,6 +22,7 @@
             --md-sys-color-surface-variant: #DFE2EB; /* For card backgrounds or secondary surfaces */
             --md-sys-color-on-surface-variant: #42474E;
             --md-sys-color-outline: #73777F;
+            --md-sys-color-outline-variant: #C4C6CF; /* Added for card borders */
             --md-sys-color-background: #F8F9FC; /* Page background */
             --md-sys-color-error: #BA1A1A;
             --md-sys-color-on-error: #FFFFFF;
@@ -51,23 +52,18 @@
 
         /* Benefit & Feature Cards - MD3 Card Style */
         .benefit-card, .feature-card {
-            @apply bg-[var(--md-sys-color-surface)] p-6 rounded-2xl sm:rounded-3xl shadow-lg text-center transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-[1.02] opacity-0 transform translate-y-10;
-            border: 1px solid var(--md-sys-color-outline-variant, #CAC4D0); /* Subtle border for cards */
+            @apply bg-[var(--md-sys-color-surface)] p-6 rounded-2xl sm:rounded-3xl shadow-lg text-center transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-[1.02] opacity-0 transform translate-y-10 border border-[var(--md-sys-color-outline-variant)]; /* Updated border */
         }
         .benefit-card.is-visible, .feature-card.is-visible {
             @apply opacity-100 translate-y-0;
         }
         .benefit-icon-bg, .feature-icon-bg { /* Icon backgrounds */
-            @apply inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 mb-5 rounded-full text-[var(--md-sys-color-on-primary-container)];
-            background-color: var(--md-sys-color-primary-container);
+            @apply inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 mb-5 rounded-full text-[var(--md-sys-color-on-primary-container)] bg-[var(--md-sys-color-primary-container)]; /* Applied background using Tailwind arbitrary value */
         }
         .feature-card:hover .feature-icon-bg {
             transform: scale(1.05);
         }
-        .feature-card .feature-icon-bg { /* Slightly different styling for feature icons if needed */
-             background-color: var(--md-sys-color-primary-container);
-             color: var(--md-sys-color-on-primary-container);
-        }
+        /* .feature-card .feature-icon-bg specific styling removed as common style is sufficient */
 
 
         /* Navigation - MD3 Top App Bar Style */
@@ -172,15 +168,24 @@
     <header class="hero-bg-gradient py-24 sm:py-32 md:py-40">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <!-- 
-                IMPORTANT: IMAGE PATH! 
-                Make sure 'Copilot_20250531_123515.jpg' is in the SAME FOLDER as this HTML file,
-                OR update the src path below if it's in a subfolder (e.g., "images/your-icon.jpg").
+                =============================================================================
+                IMPORTANT: IMAGE PATH FOR GITHUB PAGES
+                =============================================================================
+                For 'Copilot_20250531_123515.jpg' to show up on GitHub Pages, ensure:
+                1. The image file IS IN THE SAME DIRECTORY as this HTML file in your repository.
+                2. If your HTML file is in a subdirectory (e.g., /docs/index.html), the image 
+                   must also be in that SAME subdirectory for the current path to work.
+                3. If the image is in a different location (e.g., an 'assets' or 'images' folder,
+                   or in the root while this HTML is in a subfolder), 
+                   YOU MUST UPDATE THE 'src' ATTRIBUTE BELOW with the correct relative path.
+                   Example: src="images/Copilot_20250531_123515.jpg" or src="../Copilot_20250531_123515.jpg"
+                =============================================================================
             -->
-            <img src="Copilot_20250531_123515.jpg" 
+            <img src="Copilot_20250531_123515.png" 
                  alt="NoteFlow App Icon" 
                  class="mx-auto mb-8 sm:mb-10 rounded-[28px] shadow-xl w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 object-cover scroll-animate" 
                  id="app-logo" 
-                 onerror="this.onerror=null; this.src='https://placehold.co/192x192/D1E4FF/001D36?text=NF&font=Inter&font-size=90'; this.alt='NoteFlow Logo Placeholder'">
+                 onerror="this.onerror=null; this.src='https://placehold.co/192x192/D1E4FF/001D36?text=NF&font=Inter&font-size=90'; this.alt='NoteFlow Logo Placeholder - Image Not Found'">
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--md-sys-color-on-surface)] mb-5 scroll-animate" style="transition-delay: 0.1s;" id="app-main-headline">Elevate Your Learning with NoteFlow</h1>
             <p class="text-lg sm:text-xl text-[var(--md-sys-color-on-surface-variant)] mb-10 sm:mb-12 max-w-2xl mx-auto scroll-animate" style="transition-delay: 0.2s;" id="app-tagline">Study Smarter, Stress Less, Achieve More.</p>
             <a href="#download" class="cta-button-primary scroll-animate" style="transition-delay: 0.3s;">
