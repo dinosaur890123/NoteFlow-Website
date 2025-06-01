@@ -34,29 +34,21 @@
 </head>
 <body class="antialiased">
 
-    <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50 transition-colors duration-300">
+    <nav class="bg-white shadow-lg sticky top-0 z-50 transition-colors duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
-                    <a href="#home" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors">NoteFlow</a>
+                    <a href="#home" class="text-2xl font-bold text-indigo-600 hover:text-indigo-700 transition-colors">NoteFlow</a>
                 </div>
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="#home" data-page-link="home" class="nav-link px-3 py-2 text-gray-700 dark:text-gray-300">Home</a>
-                    <a href="#pricing" data-page-link="pricing" class="nav-link px-3 py-2 text-gray-700 dark:text-gray-300">Pricing</a>
-                    <a href="#notify" data-page-link="notify" class="nav-link px-3 py-2 text-gray-700 dark:text-gray-300">Notify Me</a>
-                    <a href="#about" data-page-link="about" class="nav-link px-3 py-2 text-gray-700 dark:text-gray-300">About</a>
-                    <a href="#gallery" data-page-link="gallery" class="nav-link px-3 py-2 text-gray-700 dark:text-gray-300">Gallery</a>
-                    <button id="theme-toggle-button" aria-label="Toggle theme" class="ml-3 p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                        <svg id="theme-icon-sun" class="h-5 w-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 12.122l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414-1.414zM17 13a1 1 0 100 2h-1a1 1 0 100-2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                        <svg id="theme-icon-moon" class="h-5 w-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                    </button>
+                    <a href="#home" data-page-link="home" class="nav-link px-3 py-2 text-gray-700">Home</a>
+                    <a href="#pricing" data-page-link="pricing" class="nav-link px-3 py-2 text-gray-700">Pricing</a>
+                    <a href="#notify" data-page-link="notify" class="nav-link px-3 py-2 text-gray-700">Notify Me</a>
+                    <a href="#about" data-page-link="about" class="nav-link px-3 py-2 text-gray-700">About</a>
+                    <a href="#gallery" data-page-link="gallery" class="nav-link px-3 py-2 text-gray-700">Gallery</a>
                 </div>
                 <div class="md:hidden flex items-center">
-                    <button id="theme-toggle-button-mobile" aria-label="Toggle theme" class="mr-2 p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                         <svg id="theme-icon-sun-mobile" class="h-5 w-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 12.122l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414-1.414zM17 13a1 1 0 100 2h-1a1 1 0 100-2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                        <svg id="theme-icon-moon-mobile" class="h-5 w-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                    </button>
-                    <button id="mobile-menu-button" aria-label="Open menu" aria-expanded="false" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800 p-2 rounded-md">
+                    <button id="mobile-menu-button" aria-label="Open menu" aria-expanded="false" class="text-gray-700 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 p-2 rounded-md">
                         <svg id="menu-icon-open" class="h-6 w-6 block" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                         </svg>
@@ -67,12 +59,12 @@
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="md:hidden bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700">
-            <a href="#home" data-page-link="home" class="block nav-link text-left py-3 px-4 border-b border-gray-100 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">Home</a>
-            <a href="#pricing" data-page-link="pricing" class="block nav-link text-left py-3 px-4 border-b border-gray-100 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">Pricing</a>
-            <a href="#notify" data-page-link="notify" class="block nav-link text-left py-3 px-4 border-b border-gray-100 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">Notify Me</a>
-            <a href="#about" data-page-link="about" class="block nav-link text-left py-3 px-4 border-b border-gray-100 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">About</a>
-            <a href="#gallery" data-page-link="gallery" class="block nav-link text-left py-3 px-4 hover:bg-indigo-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">Gallery</a>
+        <div id="mobile-menu" class="md:hidden bg-white shadow-lg border-t border-gray-200">
+            <a href="#home" data-page-link="home" class="block nav-link text-left py-3 px-4 border-b border-gray-100 hover:bg-indigo-50 text-gray-700">Home</a>
+            <a href="#pricing" data-page-link="pricing" class="block nav-link text-left py-3 px-4 border-b border-gray-100 hover:bg-indigo-50 text-gray-700">Pricing</a>
+            <a href="#notify" data-page-link="notify" class="block nav-link text-left py-3 px-4 border-b border-gray-100 hover:bg-indigo-50 text-gray-700">Notify Me</a>
+            <a href="#about" data-page-link="about" class="block nav-link text-left py-3 px-4 border-b border-gray-100 hover:bg-indigo-50 text-gray-700">About</a>
+            <a href="#gallery" data-page-link="gallery" class="block nav-link text-left py-3 px-4 hover:bg-indigo-50 text-gray-700">Gallery</a>
         </div>
     </nav>
 
@@ -80,16 +72,16 @@
 
         <section id="home" class="page-content" data-title="Home - Your Ultimate Study Companion">
             <header class="text-center py-12 md:py-16 scroll-reveal">
-                <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-5 text-gray-900 dark:text-white">
+                <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-5 text-gray-900">
                     <span class="hero-title-gradient">Ditch the Study Chaos.</span><br>
-                    <span class="block text-indigo-600 dark:text-indigo-400 mt-2 md:mt-3">Unleash Your Genius with NoteFlow.</span>
+                    <span class="block text-indigo-600 mt-2 md:mt-3">Unleash Your Genius with NoteFlow.</span>
                 </h1>
-                <p class="text-base font-semibold uppercase tracking-wider text-indigo-500 dark:text-indigo-400 mb-6">Exclusively for Windows</p>
-                <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-12">
+                <p class="text-base font-semibold uppercase tracking-wider text-indigo-500 mb-6">Exclusively for Windows</p>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-700 mb-12">
                     Is your brain drowning in scattered notes and endless to-do lists? It's time to stop surviving your studies and start conquering them. NoteFlow is the all-in-one Windows command center for academic victory.
                 </p>
                 <button id="main-cta-button" class="btn-coming-soon">NoteFlow - Coming Soon!</button>
-                <p class="notify-prompt">Be the first to know! <a href="#notify" data-page-link="notify">Sign up for launch updates!</a></p>
+                <p class="notify-prompt">Be the first to know! <a href="#notify" data-page-link="notify" class="text-indigo-600 hover:text-indigo-700">Sign up for launch updates!</a></p>
             </header>
 
             <main>
@@ -100,58 +92,58 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                         <div id="notes-feature" class="feature-section flex flex-col scroll-reveal">
-                            <div class="mb-4 text-3xl">🗒️</div><h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">Unmatched Note Organization</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow">Say goodbye to messy files. Structure notes by subject and topic, finding anything in seconds.</p>
-                            <div class="light:bg-slate-100 light:border-slate-200 dark:bg-gray-700 dark:border-gray-600 p-6 rounded-lg shadow-sm mt-auto">
-                                <ul class="space-y-2"><li class="font-semibold text-lg light:text-slate-700 dark:text-slate-200">▾ Subjects</li>
-                                    <ul class="pl-6 space-y-1 light:text-slate-600 dark:text-slate-300"><li class="light:bg-indigo-100 dark:bg-indigo-700 p-3 rounded-md font-semibold light:text-indigo-700 dark:text-indigo-200">▾ Mathematics</li>
-                                        <ul class="pl-6 pt-2 space-y-1.5"><li class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-gray-600 transition-colors light:text-slate-700 dark:text-slate-300">Algebra</li><li class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-gray-600 transition-colors light:text-slate-700 dark:text-slate-300">Calculus</li><li class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-gray-600 transition-colors light:text-slate-700 dark:text-slate-300">Statistics</li></ul>
-                                    <li class="font-semibold p-3 rounded-md mt-1 hover:bg-slate-200 dark:hover:bg-gray-600 transition-colors light:text-slate-700 dark:text-slate-300">▾ History</li></ul>
+                            <div class="mb-4 text-3xl">🗒️</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Unmatched Note Organization</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Say goodbye to messy files. Structure notes by subject and topic, finding anything in seconds.</p>
+                            <div class="bg-slate-100 border-slate-200 p-6 rounded-lg shadow-sm mt-auto">
+                                <ul class="space-y-2"><li class="font-semibold text-lg text-slate-700">▾ Subjects</li>
+                                    <ul class="pl-6 space-y-1 text-slate-600"><li class="bg-indigo-100 p-3 rounded-md font-semibold text-indigo-700">▾ Mathematics</li>
+                                        <ul class="pl-6 pt-2 space-y-1.5"><li class="p-2 rounded-md hover:bg-slate-200 transition-colors text-slate-700">Algebra</li><li class="p-2 rounded-md hover:bg-slate-200 transition-colors text-slate-700">Calculus</li><li class="p-2 rounded-md hover:bg-slate-200 transition-colors text-slate-700">Statistics</li></ul>
+                                    <li class="font-semibold p-3 rounded-md mt-1 hover:bg-slate-200 transition-colors text-slate-700">▾ History</li></ul>
                                 </ul>
                             </div>
                         </div>
                         <div id="todos-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.1s;">
-                            <div class="mb-4 text-3xl">✅</div><h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">A To-Do List That Works</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow">Break down projects, track progress, and never miss a deadline. Watch the bar update!</p>
-                            <div class="mt-auto"><div class="mb-4"><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Project Progress</label><div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-5"><div id="progress-bar" class="bg-indigo-500 dark:bg-indigo-400 h-5 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div></div></div>
-                                <div class="space-y-3"><div class="light:bg-slate-50 dark:bg-gray-700 p-3 rounded-lg border light:border-slate-200 dark:border-gray-600 todo-item-container"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"><span class="ml-3 text-gray-700 dark:text-gray-200">History Essay</span></label><div class="pl-8 mt-1 text-xs space-y-1"><label class="flex items-center todo-item-container"><input type="checkbox" class="todo-item h-4 w-4 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400"><span class="ml-2 text-gray-500 dark:text-gray-400">Research</span></label><label class="flex items-center todo-item-container"><input type="checkbox" class="todo-item h-4 w-4 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400"><span class="ml-2 text-gray-500 dark:text-gray-400">Outline</span></label></div></div>
-                                <div class="light:bg-slate-50 dark:bg-gray-700 p-3 rounded-lg border light:border-slate-200 dark:border-gray-600 todo-item-container"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400"><span class="ml-3 text-gray-700 dark:text-gray-200">Calculus Exam Prep</span></label></div></div>
+                            <div class="mb-4 text-3xl">✅</div><h3 class="text-2xl font-bold mb-3 text-gray-800">A To-Do List That Works</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Break down projects, track progress, and never miss a deadline. Watch the bar update!</p>
+                            <div class="mt-auto"><div class="mb-4"><label class="block text-sm font-medium text-gray-700 mb-1">Project Progress</label><div class="w-full bg-gray-200 rounded-full h-5"><div id="progress-bar" class="bg-indigo-500 h-5 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div></div></div>
+                                <div class="space-y-3"><div class="bg-slate-50 p-3 rounded-lg border border-slate-200 todo-item-container"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500"><span class="ml-3 text-gray-700">History Essay</span></label><div class="pl-8 mt-1 text-xs space-y-1"><label class="flex items-center todo-item-container"><input type="checkbox" class="todo-item h-4 w-4 rounded border-gray-300 text-indigo-600"><span class="ml-2 text-gray-500">Research</span></label><label class="flex items-center todo-item-container"><input type="checkbox" class="todo-item h-4 w-4 rounded border-gray-300 text-indigo-600"><span class="ml-2 text-gray-500">Outline</span></label></div></div>
+                                <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 todo-item-container"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 text-indigo-600"><span class="ml-3 text-gray-700">Calculus Exam Prep</span></label></div></div>
                             </div>
                         </div>
                         <div id="flashcards-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.2s;">
-                            <div class="mb-4 text-3xl">🧠</div><h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">Revision on Autopilot</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow">Turn notes into revision tools. Create flashcards to lock in concepts. Click to flip!</p>
+                            <div class="mb-4 text-3xl">🧠</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Revision on Autopilot</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Turn notes into revision tools. Create flashcards to lock in concepts. Click to flip!</p>
                             <div id="flashcard-demo" class="flashcard h-56 w-full max-w-sm mx-auto cursor-pointer perspective-1000 mt-auto">
                                 <div class="flashcard-inner">
-                                    <div class="flashcard-front shadow-md bg-slate-100 text-slate-800 border border-slate-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
-                                        <p class="text-gray-500 dark:text-gray-400 text-xs mb-2 uppercase tracking-wider">Subject: CompSci</p>
-                                        <h4 class="text-lg font-semibold text-slate-800 dark:text-gray-200">CPU Primary Function?</h4>
+                                    <div class="flashcard-front shadow-md bg-slate-100 text-slate-800 border border-slate-300">
+                                        <p class="text-gray-500 text-xs mb-2 uppercase tracking-wider">Subject: CompSci</p>
+                                        <h4 class="text-lg font-semibold text-slate-800">CPU Primary Function?</h4>
                                     </div>
-                                    <div class="flashcard-back shadow-md bg-indigo-100 text-indigo-700 border border-indigo-300 dark:bg-indigo-700 dark:border-indigo-500 dark:text-indigo-100">
-                                        <h4 class="text-lg font-semibold text-indigo-700 dark:text-indigo-100">Execute program instructions.</h4>
+                                    <div class="flashcard-back shadow-md bg-indigo-100 text-indigo-700 border border-indigo-300">
+                                        <h4 class="text-lg font-semibold text-indigo-700">Execute program instructions.</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="timer-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.05s;">
-                            <div class="mb-4 text-3xl">⏱️</div><h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">Harness Deep Focus</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow">Use the Pomodoro Technique for focused sprints. Eliminate distractions, get more done.</p>
-                            <div id="pomodoro-card" class="text-center bg-slate-100 dark:bg-gray-700 p-6 rounded-xl border border-slate-200 dark:border-gray-600 shadow-sm mt-auto"><div id="pomodoro-display" class="text-5xl font-bold text-indigo-600 dark:text-indigo-400 mb-3 tabular-nums">25:00</div><p id="pomodoro-status" class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Ready to focus?</p><button id="pomodoro-btn" class="bg-indigo-600 dark:bg-indigo-500 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Start Focus</button></div>
+                            <div class="mb-4 text-3xl">⏱️</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Harness Deep Focus</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Use the Pomodoro Technique for focused sprints. Eliminate distractions, get more done.</p>
+                            <div id="pomodoro-card" class="text-center bg-slate-100 p-6 rounded-xl border border-slate-200 shadow-sm mt-auto"><div id="pomodoro-display" class="text-5xl font-bold text-indigo-600 mb-3 tabular-nums">25:00</div><p id="pomodoro-status" class="text-gray-600 mb-4 text-sm">Ready to focus?</p><button id="pomodoro-btn" class="bg-indigo-600 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Start Focus</button></div>
                         </div>
                         <div id="mindfulness-feature" class="feature-section flex flex-col col-span-1 md:col-span-2 lg:col-span-1 scroll-reveal" style="transition-delay: 0.15s;">
-                             <div class="mb-4 text-3xl">🧘</div><h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">Find Your Calm Center</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow">Academic pressure is real. Reset with a simple breathing exercise. Your brain will thank you.</p>
-                            <div class="text-center bg-slate-100 dark:bg-gray-700 p-6 rounded-xl border border-slate-200 dark:border-gray-600 shadow-sm mt-auto flex flex-col items-center justify-center min-h-[240px]"><div id="breathing-circle" class="breathing-circle mb-6"></div><p id="breathing-text" class="text-gray-600 dark:text-gray-400 mb-5 text-sm">Inhale... Exhale...</p<button id="mindfulness-btn" class="bg-indigo-600 dark:bg-indigo-500 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Begin Breathing</button></div>
+                             <div class="mb-4 text-3xl">🧘</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Find Your Calm Center</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Academic pressure is real. Reset with a simple breathing exercise. Your brain will thank you.</p>
+                            <div class="text-center bg-slate-100 p-6 rounded-xl border border-slate-200 shadow-sm mt-auto flex flex-col items-center justify-center min-h-[240px]"><div id="breathing-circle" class="breathing-circle mb-6"></div><p id="breathing-text" class="text-gray-600 mb-5 text-sm">Inhale... Exhale...</p<button id="mindfulness-btn" class="bg-indigo-600 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Begin Breathing</button></div>
                         </div>
                     </div>
                 </section>
                 
-                <section id="benefits" class="py-12 md:py-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg my-12 scroll-reveal">
+                <section id="benefits" class="py-12 md:py-16 bg-white rounded-xl shadow-lg my-12 scroll-reveal">
                     <div class="text-center mb-12 px-6"><h2 class="section-title">The NoteFlow Advantage</h2><p class="section-subtitle">It's more than just features. It's about building a better study system for your Windows setup.</p></div>
                     <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-x-8 gap-y-12 text-center px-6">
-                        <div class="p-6 hover:shadow-xl dark:hover:shadow-indigo-500/20 transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500 dark:text-indigo-400">🚀</div><h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">Study Smarter, Not Harder</h3><p class="text-gray-600 dark:text-gray-400 text-base">An integrated workflow means less time switching between apps and more time learning.</p></div>
-                        <div class="p-6 hover:shadow-xl dark:hover:shadow-indigo-500/20 transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500 dark:text-indigo-400">💡</div><h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">Gain Deeper Understanding</h3><p class="text-gray-600 dark:text-gray-400 text-base">Connect your notes, tasks, and revision to see the big picture and reinforce knowledge.</p></div>
-                        <div class="p-6 hover:shadow-xl dark:hover:shadow-indigo-500/20 transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500 dark:text-indigo-400">🧘</div><h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">Reduce Stress & Overwhelm</h3><p class="text-gray-600 dark:text-gray-400 text-base">Feel in complete control of your academic life with a system that keeps everything organized.</p></div>
+                        <div class="p-6 hover:shadow-xl transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500">🚀</div><h3 class="text-xl font-semibold mb-2 text-gray-800">Study Smarter, Not Harder</h3><p class="text-gray-600 text-base">An integrated workflow means less time switching between apps and more time learning.</p></div>
+                        <div class="p-6 hover:shadow-xl transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500">💡</div><h3 class="text-xl font-semibold mb-2 text-gray-800">Gain Deeper Understanding</h3><p class="text-gray-600 text-base">Connect your notes, tasks, and revision to see the big picture and reinforce knowledge.</p></div>
+                        <div class="p-6 hover:shadow-xl transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500">🧘</div><h3 class="text-xl font-semibold mb-2 text-gray-800">Reduce Stress & Overwhelm</h3><p class="text-gray-600 text-base">Feel in complete control of your academic life with a system that keeps everything organized.</p></div>
                     </div>
                 </section>
                                 
@@ -196,22 +188,22 @@
                 <p class="page-text">
                     Unlock all the powerful features of NoteFlow with a simple, one-time purchase. No subscriptions, no recurring fees – just lifetime access to your ultimate study companion for Windows.
                 </p>
-                <div class="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-xl max-w-md mx-auto text-center border-2 border-indigo-500 dark:border-indigo-400 transform hover:scale-105 transition-transform duration-300">
-                    <h3 class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">NoteFlow Pro</h3>
-                    <p class="text-gray-500 dark:text-gray-400 text-lg mb-6">Lifetime Access</p>
-                    <p class="text-6xl font-extrabold text-gray-800 dark:text-gray-100 mb-6">$5<span class="text-2xl font-normal text-gray-500 dark:text-gray-400">.00</span></p>
-                    <p class="text-gray-600 dark:text-gray-300 mb-8">One-time payment. All features included. Future updates free.</p>
-                    <ul class="text-left space-y-3 text-gray-700 dark:text-gray-300 mb-10">
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Organized Notes (Subjects & Topics)</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Sophisticated To-Do List</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Flashcards for Revision</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Pomodoro Study Timer</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Mindfulness Breathing Exercises</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Exclusively for Windows</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Lifetime Updates</li>
+                <div class="bg-white p-8 md:p-12 rounded-xl shadow-xl max-w-md mx-auto text-center border-2 border-indigo-500 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-3xl font-bold text-indigo-600 mb-2">NoteFlow Pro</h3>
+                    <p class="text-gray-500 text-lg mb-6">Lifetime Access</p>
+                    <p class="text-6xl font-extrabold text-gray-800 mb-6">$5<span class="text-2xl font-normal text-gray-500">.00</span></p>
+                    <p class="text-gray-600 mb-8">One-time payment. All features included. Future updates free.</p>
+                    <ul class="text-left space-y-3 text-gray-700 mb-10">
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-xl">✔</span> Organized Notes (Subjects & Topics)</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-xl">✔</span> Sophisticated To-Do List</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-xl">✔</span> Flashcards for Revision</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-xl">✔</span> Pomodoro Study Timer</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-xl">✔</span> Mindfulness Breathing Exercises</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-xl">✔</span> Exclusively for Windows</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2 text-xl">✔</span> Lifetime Updates</li>
                     </ul>
                     <button class="w-full btn-coming-soon text-lg">Coming Soon!</button>
-                    <p class="notify-prompt dark:text-gray-400">Get ready! <a href="#notify" data-page-link="notify" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">Sign up for launch news!</a></p>
+                    <p class="notify-prompt">Get ready! <a href="#notify" data-page-link="notify" class="text-indigo-600 hover:text-indigo-700">Sign up for launch news!</a></p>
                 </div>
             </div>
         </section>
@@ -233,10 +225,10 @@
                     Sign up below with your email address to receive an exclusive notification the moment NoteFlow is live on the Microsoft Store. 
                     You'll also be eligible for any early-bird specials we might announce!
                 </p>
-                <div class="iframe-container bg-white dark:bg-gray-700">
+                <div class="iframe-container bg-white">
                     <iframe width="640px" height="480px" src="https://forms.microsoft.com/r/S1Jt5s0zM1?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
                 </div>
-                 <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-8">
+                 <p class="text-center text-sm text-gray-500 mt-8">
                     We respect your privacy. Your email will only be used to notify you about the NoteFlow launch.
                 </p>
             </div>
@@ -255,7 +247,7 @@
             </script>
              <div class="max-w-4xl mx-auto px-4 scroll-reveal">
                 <h2 class="page-title">About NoteFlow</h2>
-                <div class="bg-white dark:bg-gray-800 p-8 md:p-10 rounded-xl shadow-xl text-gray-700 dark:text-gray-300 space-y-6 text-lg leading-relaxed">
+                <div class="bg-white p-8 md:p-10 rounded-xl shadow-xl text-gray-700 space-y-6 text-lg leading-relaxed">
                     <p>
                         NoteFlow was born from a simple idea: studying should be organized, focused, and less stressful. As students ourselves, we juggled countless apps – one for notes, another for to-do lists, separate timers, and flashcard apps. It was chaotic and inefficient.
                     </p>
@@ -268,7 +260,7 @@
                     <p>
                         NoteFlow is built with care, focusing on a clean interface, robust features, and the promise of a one-time purchase for lifetime value. We're committed to continuously improving NoteFlow and supporting our community of learners.
                     </p>
-                    <p class="font-semibold text-indigo-600 dark:text-indigo-400 mt-8">Thank you for choosing NoteFlow!</p>
+                    <p class="font-semibold text-indigo-600 mt-8">Thank you for choosing NoteFlow!</p>
                 </div>
             </div>
         </section>
@@ -279,17 +271,17 @@
                 <p class="page-text">
                     Welcome to the NoteFlow Gallery! Get a sneak peek of NoteFlow's clean interface and powerful features designed to enhance your study experience on Windows. More visuals coming soon!
                 </p>
-                <div class="bg-gradient-to-tr from-indigo-100 via-purple-100 to-pink-100 dark:from-indigo-900 dark:via-purple-800 dark:to-pink-700 p-8 md:p-16 rounded-xl shadow-xl text-center min-h-[350px] flex flex-col justify-center items-center border-2 border-dashed border-indigo-300 dark:border-indigo-600 transform hover:scale-102 transition-transform duration-500 ease-out">
+                <div class="bg-gradient-to-tr from-indigo-100 via-purple-100 to-pink-100 p-8 md:p-16 rounded-xl shadow-xl text-center min-h-[350px] flex flex-col justify-center items-center border-2 border-dashed border-indigo-300 transform hover:scale-102 transition-transform duration-500 ease-out">
                     <span class="text-7xl mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 gallery-placeholder-text" style="animation-duration: 4s;">🖼️✨🚀</span>
-                    <p class="text-3xl text-gray-700 dark:text-gray-200 font-semibold gallery-placeholder-text" style="animation-delay: 0.2s; animation-duration: 4s;">Visuals Loading Soon...</p>
-                    <p class="text-gray-500 dark:text-gray-400 mt-3 text-lg gallery-placeholder-text" style="animation-delay: 0.4s; animation-duration: 4s;">We're polishing up some great screenshots to show you NoteFlow in all its glory!</p>
+                    <p class="text-3xl text-gray-700 font-semibold gallery-placeholder-text" style="animation-delay: 0.2s; animation-duration: 4s;">Visuals Loading Soon...</p>
+                    <p class="text-gray-500 mt-3 text-lg gallery-placeholder-text" style="animation-delay: 0.4s; animation-duration: 4s;">We're polishing up some great screenshots to show you NoteFlow in all its glory!</p>
                 </div>
             </div>
         </section>
 
     </div>
 
-    <footer class="text-center py-12 mt-8 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors duration-300">
+    <footer class="text-center py-12 mt-8 border-t border-gray-200 bg-white">
         <div class="container mx-auto px-4">
             <div class="mb-6">
                 <a href="#" class="social-icon" aria-label="NoteFlow on Twitter (Placeholder)">🐦</a>
@@ -297,12 +289,12 @@
                 <a href="#" class="social-icon" aria-label="NoteFlow on Instagram (Placeholder)">📸</a>
                  <a href="#" class="social-icon" aria-label="NoteFlow on LinkedIn (Placeholder)">🔗</a>
             </div>
-            <div class="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                <a href="#" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mx-2">Privacy Policy</a> | 
-                <a href="#" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mx-2">Terms of Service</a> |
-                <a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mx-2">Contact Us (Placeholder)</a>
+            <div class="text-sm text-gray-500 mb-4">
+                <a href="#" class="hover:text-indigo-600 transition-colors mx-2">Privacy Policy</a> | 
+                <a href="#" class="hover:text-indigo-600 transition-colors mx-2">Terms of Service</a> |
+                <a href="#contact" class="hover:text-indigo-600 transition-colors mx-2">Contact Us (Placeholder)</a>
             </div>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">&copy; <span id="currentYear"></span> NoteFlow. All rights reserved. The Ultimate Study App for Windows.</p>
+            <p class="text-gray-500 text-sm">&copy; <span id="currentYear"></span> NoteFlow. All rights reserved. The Ultimate Study App for Windows.</p>
         </div>
     </footer>
 
@@ -356,46 +348,12 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const menuIconOpen = document.getElementById('menu-icon-open');
             const menuIconClose = document.getElementById('menu-icon-close');
-            const themeToggleButton = document.getElementById('theme-toggle-button');
-            const themeToggleButtonMobile = document.getElementById('theme-toggle-button-mobile');
-            const sunIcon = document.getElementById('theme-icon-sun');
-            const moonIcon = document.getElementById('theme-icon-moon');
-            const sunIconMobile = document.getElementById('theme-icon-sun-mobile');
-            const moonIconMobile = document.getElementById('theme-icon-moon-mobile');
-            let studyChartInstance = null;
+            let studyChartInstance = null; // Removed theme toggle variables
 
-
-            function applyTheme(theme) {
-                if (theme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                    document.documentElement.classList.remove('light');
-                    if(sunIcon) sunIcon.classList.remove('hidden');
-                    if(moonIcon) moonIcon.classList.add('hidden');
-                    if(sunIconMobile) sunIconMobile.classList.remove('hidden');
-                    if(moonIconMobile) moonIconMobile.classList.add('hidden');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    document.documentElement.classList.add('light');
-                    if(sunIcon) sunIcon.classList.add('hidden');
-                    if(moonIcon) moonIcon.classList.remove('hidden');
-                    if(sunIconMobile) sunIconMobile.classList.add('hidden');
-                    if(moonIconMobile) moonIconMobile.classList.remove('hidden');
-                }
-                updateChartTheme(theme);
-            }
-
-            function toggleTheme() {
-                const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                localStorage.setItem('theme', newTheme);
-                applyTheme(newTheme);
-            }
-
-            if (themeToggleButton) themeToggleButton.addEventListener('click', toggleTheme);
-            if (themeToggleButtonMobile) themeToggleButtonMobile.addEventListener('click', toggleTheme);
-            
-            const preferredTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            applyTheme(preferredTheme);
+            // Removed theme toggle logic (applyTheme, toggleTheme, event listeners for theme buttons)
+            // Ensure HTML starts with class="light" or no theme class if light is default
+            document.documentElement.classList.add('light'); // Explicitly set light mode
+            document.documentElement.classList.remove('dark');
 
 
             if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose) {
@@ -547,12 +505,12 @@
                 });
             }
 
-            function getChartOptions(theme) {
-                const isDark = theme === 'dark';
-                const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : '#e5e7eb';
-                const tickColor = isDark ? '#9ca3af' : '#6b7280';
-                const titleColor = isDark ? '#f3f4f6' : '#1f2937';
-                const legendLabelColor = isDark ? '#d1d5db' : '#4b5563';
+            function getChartOptions(theme) { // Theme parameter is kept for potential future re-introduction
+                const isDark = false; // Force light mode for chart
+                const gridColor = '#e5e7eb';
+                const tickColor = '#6b7280';
+                const titleColor = '#1f2937';
+                const legendLabelColor = '#4b5563';
 
                 return {
                     indexAxis: 'y', responsive: true, maintainAspectRatio: false,
@@ -571,9 +529,9 @@
                     },
                     plugins: { 
                         tooltip: { 
-                            backgroundColor: isDark ? '#374151' : '#1f2937', 
-                            titleColor: isDark ? '#f3f4f6' : '#ffffff',
-                            bodyColor: isDark ? '#d1d5db' : '#e5e7eb',
+                            backgroundColor: '#1f2937', 
+                            titleColor: '#ffffff',
+                            bodyColor: '#e5e7eb',
                             titleFont: { size: 14, weight: '600' }, 
                             bodyFont: { size: 12 }, padding: 12, cornerRadius: 6, displayColors: false, 
                             callbacks: { label: function(context) { return `${context.dataset.label}: ${context.raw}%`; } } 
@@ -585,24 +543,17 @@
                 };
             }
             
-            function updateChartTheme(theme) {
-                if (studyChartInstance) {
-                    studyChartInstance.options = getChartOptions(theme);
-                    studyChartInstance.update();
-                }
-            }
-
             const chartCanvas = document.getElementById('studyChart');
             if (chartCanvas) { 
                 const ctx = chartCanvas.getContext('2d');
-                studyChartInstance = new Chart(ctx, {
+                studyChartInstance = new Chart(ctx, { // studyChartInstance is still defined
                     type: 'bar', 
                     data: { 
                         labels: ['Scattered Apps Method', 'The NoteFlow Method'],
                         datasets: [{ label: 'Focused Study Time', data: [60, 90], backgroundColor: 'rgba(79, 70, 229, 0.85)', borderColor: 'rgba(79, 70, 229, 1)', borderWidth: 1.5, borderRadius: 6, borderSkipped: false, },
                                    { label: 'Time Wasted', data: [40, 10], backgroundColor: 'rgba(239, 68, 68, 0.75)', borderColor: 'rgba(239, 68, 68, 1)', borderWidth: 1.5, borderRadius: 6, borderSkipped: false, }]
                     },
-                    options: getChartOptions(localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
+                    options: getChartOptions('light') // Force light theme for chart
                 });
             }
         });
