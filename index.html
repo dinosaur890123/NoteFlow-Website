@@ -348,11 +348,9 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const menuIconOpen = document.getElementById('menu-icon-open');
             const menuIconClose = document.getElementById('menu-icon-close');
-            let studyChartInstance = null; // Removed theme toggle variables
+            let studyChartInstance = null; 
 
-            // Removed theme toggle logic (applyTheme, toggleTheme, event listeners for theme buttons)
-            // Ensure HTML starts with class="light" or no theme class if light is default
-            document.documentElement.classList.add('light'); // Explicitly set light mode
+            document.documentElement.classList.add('light'); 
             document.documentElement.classList.remove('dark');
 
 
@@ -505,8 +503,7 @@
                 });
             }
 
-            function getChartOptions(theme) { // Theme parameter is kept for potential future re-introduction
-                const isDark = false; // Force light mode for chart
+            function getChartOptions() { 
                 const gridColor = '#e5e7eb';
                 const tickColor = '#6b7280';
                 const titleColor = '#1f2937';
@@ -546,14 +543,14 @@
             const chartCanvas = document.getElementById('studyChart');
             if (chartCanvas) { 
                 const ctx = chartCanvas.getContext('2d');
-                studyChartInstance = new Chart(ctx, { // studyChartInstance is still defined
+                studyChartInstance = new Chart(ctx, { 
                     type: 'bar', 
                     data: { 
                         labels: ['Scattered Apps Method', 'The NoteFlow Method'],
                         datasets: [{ label: 'Focused Study Time', data: [60, 90], backgroundColor: 'rgba(79, 70, 229, 0.85)', borderColor: 'rgba(79, 70, 229, 1)', borderWidth: 1.5, borderRadius: 6, borderSkipped: false, },
                                    { label: 'Time Wasted', data: [40, 10], backgroundColor: 'rgba(239, 68, 68, 0.75)', borderColor: 'rgba(239, 68, 68, 1)', borderWidth: 1.5, borderRadius: 6, borderSkipped: false, }]
                     },
-                    options: getChartOptions('light') // Force light theme for chart
+                    options: getChartOptions() 
                 });
             }
         });
