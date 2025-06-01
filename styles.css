@@ -65,10 +65,9 @@ body {
 .social-icon:hover { color: #4f46e5; transform: scale(1.25) translateY(-3px) rotate(5deg); }
 
 .hero-title-gradient {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-    vertical-align: baseline; 
+    display: inline-block; /* Crucial for sizing the span to its text content */
+    background-image: linear-gradient(60deg, #4f46e5, #a855f7, #ec4899, #f59e0b);
+    background-size: 300% 300%; /* Needs to be larger than the element for animation */
     -webkit-background-clip: text;
     -moz-background-clip: text;
     background-clip: text;
@@ -76,12 +75,13 @@ body {
     -moz-text-fill-color: transparent;
     text-fill-color: transparent;
     color: transparent; /* Fallback */
-    background-image: linear-gradient(60deg, #4f46e5, #a855f7, #ec4899, #f59e0b);
-    /* animation: heroGradientShift 8s ease infinite; */ /* Temporarily removed */
-    /* background-size: 300% 300%; */ /* Temporarily removed */
+    animation: heroGradientShift 8s ease infinite;
 }
-/* If the static gradient works, we can re-introduce animation carefully: */
-/* @keyframes heroGradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} } */
+@keyframes heroGradientShift { 
+    0%{background-position:0% 50%} 
+    50%{background-position:100% 50%} 
+    100%{background-position:0% 50%} 
+}
 
 .scroll-reveal { opacity: 0; transform: translateY(30px) scale(0.97); transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 .scroll-reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
