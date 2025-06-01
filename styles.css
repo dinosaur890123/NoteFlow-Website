@@ -64,14 +64,21 @@ body {
 .social-icon { font-size: 1.85rem; margin: 0 0.6rem; transition: color 0.25s ease-in-out, transform 0.25s ease-in-out; display: inline-block; color: #6b7280; }
 .social-icon:hover { color: #4f46e5; transform: scale(1.25) translateY(-3px) rotate(5deg); }
 
-.hero-title-gradient { -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: heroGradientShift 8s ease infinite; background-size: 300% 300%; background: linear-gradient(60deg, #4f46e5, #a855f7, #ec4899, #f59e0b); }
+.hero-title-gradient {
+    display: inline-block; /* Key fix: constrains the span to its content width */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: heroGradientShift 8s ease infinite;
+    background-size: 300% 300%;
+    background: linear-gradient(60deg, #4f46e5, #a855f7, #ec4899, #f59e0b);
+}
 @keyframes heroGradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
 .scroll-reveal { opacity: 0; transform: translateY(30px) scale(0.97); transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 .scroll-reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
 
 .notify-prompt { margin-top: 1rem; font-size: 0.9rem; color: #4b5563; }
-.notify-prompt-dark-bg { margin-top: 1rem; font-size: 0.9rem; color: #e0e7ff; } /* For text on dark gradient backgrounds */
+.notify-prompt-dark-bg { margin-top: 1rem; font-size: 0.9rem; color: #e0e7ff; } 
 .notify-prompt a, .notify-prompt-dark-bg a { text-decoration: none; font-weight: 600; transition: color 0.2s ease, text-decoration 0.2s ease, border-bottom-color 0.2s ease; border-bottom: 1px solid transparent;}
 .notify-prompt a { color: #4f46e5; }
 .notify-prompt a:hover { color: #3730a3; border-bottom-color: #6366f1; }
