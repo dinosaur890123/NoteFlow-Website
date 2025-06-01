@@ -32,7 +32,7 @@
     }
     </script>
 </head>
-<body class="text-gray-800 antialiased">
+<body class="antialiased">
 
     <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50 transition-colors duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,8 +100,8 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                         <div id="notes-feature" class="feature-section flex flex-col scroll-reveal">
-                            <div class="mb-4 text-3xl">🗒️</div><h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">Unmatched Note Organization</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow">Say goodbye to messy files. Structure notes by subject and topic, finding anything in seconds.</p>
+                            <div class="mb-4 text-3xl">🗒️</div><h3 class="text-2xl font-bold mb-3">Unmatched Note Organization</h3>
+                            <p class="mb-6 flex-grow">Say goodbye to messy files. Structure notes by subject and topic, finding anything in seconds.</p>
                             <div class="bg-slate-100 dark:bg-gray-700 p-6 rounded-lg border border-slate-200 dark:border-gray-600 shadow-sm mt-auto">
                                 <ul class="space-y-2"><li class="font-semibold text-lg text-slate-700 dark:text-slate-200">▾ Subjects</li>
                                     <ul class="pl-6 space-y-1 text-slate-600 dark:text-slate-300"><li class="bg-indigo-100 dark:bg-indigo-700 p-3 rounded-md font-semibold text-indigo-700 dark:text-indigo-200">▾ Mathematics</li>
@@ -111,36 +111,36 @@
                             </div>
                         </div>
                         <div id="todos-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.1s;">
-                            <div class="mb-4 text-3xl">✅</div><h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">A To-Do List That Works</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow">Break down projects, track progress, and never miss a deadline. Watch the bar update!</p>
+                            <div class="mb-4 text-3xl">✅</div><h3 class="text-2xl font-bold mb-3">A To-Do List That Works</h3>
+                            <p class="mb-6 flex-grow">Break down projects, track progress, and never miss a deadline. Watch the bar update!</p>
                             <div class="mt-auto"><div class="mb-4"><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Project Progress</label><div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-5"><div id="progress-bar" class="bg-indigo-500 dark:bg-indigo-400 h-5 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div></div></div>
                                 <div class="space-y-3"><div class="bg-slate-50 dark:bg-gray-700 p-3 rounded-lg border border-slate-200 dark:border-gray-600 todo-item-container"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"><span class="ml-3 text-gray-700 dark:text-gray-200">History Essay</span></label><div class="pl-8 mt-1 text-xs space-y-1"><label class="flex items-center todo-item-container"><input type="checkbox" class="todo-item h-4 w-4 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400"><span class="ml-2 text-gray-500 dark:text-gray-400">Research</span></label><label class="flex items-center todo-item-container"><input type="checkbox" class="todo-item h-4 w-4 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400"><span class="ml-2 text-gray-500 dark:text-gray-400">Outline</span></label></div></div>
                                 <div class="bg-slate-50 dark:bg-gray-700 p-3 rounded-lg border border-slate-200 dark:border-gray-600 todo-item-container"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400"><span class="ml-3 text-gray-700 dark:text-gray-200">Calculus Exam Prep</span></label></div></div>
                             </div>
                         </div>
                         <div id="flashcards-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.2s;">
-                            <div class="mb-4 text-3xl">🧠</div><h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">Revision on Autopilot</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow">Turn notes into revision tools. Create flashcards to lock in concepts. Click to flip!</p>
+                            <div class="mb-4 text-3xl">🧠</div><h3 class="text-2xl font-bold mb-3">Revision on Autopilot</h3>
+                            <p class="mb-6 flex-grow">Turn notes into revision tools. Create flashcards to lock in concepts. Click to flip!</p>
                             <div id="flashcard-demo" class="flashcard h-56 w-full max-w-sm mx-auto cursor-pointer perspective-1000 mt-auto">
                                 <div class="flashcard-inner">
                                     <div class="flashcard-front shadow-md bg-slate-100 text-slate-800 border border-slate-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
                                         <p class="text-gray-500 dark:text-gray-400 text-xs mb-2 uppercase tracking-wider">Subject: CompSci</p>
-                                        <h4 class="text-lg font-semibold">CPU Primary Function?</h4>
+                                        <h4 class="text-lg font-semibold text-slate-800 dark:text-gray-200">CPU Primary Function?</h4>
                                     </div>
                                     <div class="flashcard-back shadow-md bg-indigo-100 text-indigo-700 border border-indigo-300 dark:bg-indigo-700 dark:border-indigo-500 dark:text-indigo-100">
-                                        <h4 class="text-lg font-semibold">Execute program instructions.</h4>
+                                        <h4 class="text-lg font-semibold text-indigo-700 dark:text-indigo-100">Execute program instructions.</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="timer-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.05s;">
-                            <div class="mb-4 text-3xl">⏱️</div><h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">Harness Deep Focus</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow">Use the Pomodoro Technique for focused sprints. Eliminate distractions, get more done.</p>
+                            <div class="mb-4 text-3xl">⏱️</div><h3 class="text-2xl font-bold mb-3">Harness Deep Focus</h3>
+                            <p class="mb-6 flex-grow">Use the Pomodoro Technique for focused sprints. Eliminate distractions, get more done.</p>
                             <div id="pomodoro-card" class="text-center bg-slate-100 dark:bg-gray-700 p-6 rounded-xl border border-slate-200 dark:border-gray-600 shadow-sm mt-auto"><div id="pomodoro-display" class="text-5xl font-bold text-indigo-600 dark:text-indigo-400 mb-3 tabular-nums">25:00</div><p id="pomodoro-status" class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Ready to focus?</p><button id="pomodoro-btn" class="bg-indigo-600 dark:bg-indigo-500 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Start Focus</button></div>
                         </div>
                         <div id="mindfulness-feature" class="feature-section flex flex-col col-span-1 md:col-span-2 lg:col-span-1 scroll-reveal" style="transition-delay: 0.15s;">
-                             <div class="mb-4 text-3xl">🧘</div><h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">Find Your Calm Center</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow">Academic pressure is real. Reset with a simple breathing exercise. Your brain will thank you.</p>
+                             <div class="mb-4 text-3xl">🧘</div><h3 class="text-2xl font-bold mb-3">Find Your Calm Center</h3>
+                            <p class="mb-6 flex-grow">Academic pressure is real. Reset with a simple breathing exercise. Your brain will thank you.</p>
                             <div class="text-center bg-slate-100 dark:bg-gray-700 p-6 rounded-xl border border-slate-200 dark:border-gray-600 shadow-sm mt-auto flex flex-col items-center justify-center min-h-[240px]"><div id="breathing-circle" class="breathing-circle mb-6"></div><p id="breathing-text" class="text-gray-600 dark:text-gray-400 mb-5 text-sm">Inhale... Exhale...</p<button id="mindfulness-btn" class="bg-indigo-600 dark:bg-indigo-500 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Begin Breathing</button></div>
                         </div>
                     </div>
@@ -368,12 +368,14 @@
             function applyTheme(theme) {
                 if (theme === 'dark') {
                     document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
                     if(sunIcon) sunIcon.classList.remove('hidden');
                     if(moonIcon) moonIcon.classList.add('hidden');
                     if(sunIconMobile) sunIconMobile.classList.remove('hidden');
                     if(moonIconMobile) moonIconMobile.classList.add('hidden');
                 } else {
                     document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
                     if(sunIcon) sunIcon.classList.add('hidden');
                     if(moonIcon) moonIcon.classList.remove('hidden');
                     if(sunIconMobile) sunIconMobile.classList.add('hidden');
