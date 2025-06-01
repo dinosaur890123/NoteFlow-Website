@@ -1,611 +1,130 @@
-<!DOCTYPE html>
-<html lang="en" class="">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoteFlow - The Ultimate Study App for Windows</title>
-    <meta name="description" content="NoteFlow is the all-in-one Windows study app with organized notes, to-do lists, flashcards, Pomodoro timer, and mindfulness features. Sign up to get notified at launch!">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css"> 
-    <script type="application/ld+json" id="structured-data-main">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "NoteFlow",
-      "applicationCategory": "ProductivityApplication",
-      "operatingSystem": "Windows",
-      "description": "NoteFlow is the all-in-one Windows study app with organized notes, to-do lists, flashcards, Pomodoro timer, and mindfulness features. Sign up to get notified at launch!",
-      "offers": {
-        "@type": "Offer",
-        "price": "5.00",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/ComingSoon"
-      },
-      "mainEntityOfPage": {
-         "@type": "WebPage",
-         "@id": "YOUR_MAIN_URL_HERE#home" 
-      }
-    }
-    </script>
-</head>
-<body class="antialiased">
+html.dark { color-scheme: dark; }
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: #f9fafb; 
+    color: #1f2937; 
+    scroll-behavior: smooth; 
+    overflow-x: hidden; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+html.dark body {
+    background-color: #111827; 
+    color: #d1d5db; 
+}
 
-    <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50 transition-colors duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex-shrink-0">
-                    <a href="#home" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors">NoteFlow</a>
-                </div>
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="#home" data-page-link="home" class="nav-link px-3 py-2 text-gray-700 dark:text-gray-300">Home</a>
-                    <a href="#pricing" data-page-link="pricing" class="nav-link px-3 py-2 text-gray-700 dark:text-gray-300">Pricing</a>
-                    <a href="#notify" data-page-link="notify" class="nav-link px-3 py-2 text-gray-700 dark:text-gray-300">Notify Me</a>
-                    <a href="#about" data-page-link="about" class="nav-link px-3 py-2 text-gray-700 dark:text-gray-300">About</a>
-                    <a href="#gallery" data-page-link="gallery" class="nav-link px-3 py-2 text-gray-700 dark:text-gray-300">Gallery</a>
-                    <button id="theme-toggle-button" aria-label="Toggle theme" class="ml-3 p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                        <svg id="theme-icon-sun" class="h-5 w-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 12.122l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414-1.414zM17 13a1 1 0 100 2h-1a1 1 0 100-2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                        <svg id="theme-icon-moon" class="h-5 w-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                    </button>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button id="theme-toggle-button-mobile" aria-label="Toggle theme" class="mr-2 p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                         <svg id="theme-icon-sun-mobile" class="h-5 w-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 12.122l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414-1.414zM17 13a1 1 0 100 2h-1a1 1 0 100-2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                        <svg id="theme-icon-moon-mobile" class="h-5 w-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                    </button>
-                    <button id="mobile-menu-button" aria-label="Open menu" aria-expanded="false" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800 p-2 rounded-md">
-                        <svg id="menu-icon-open" class="h-6 w-6 block" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
-                        <svg id="menu-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="md:hidden bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700">
-            <a href="#home" data-page-link="home" class="block nav-link text-left py-3 px-4 border-b border-gray-100 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">Home</a>
-            <a href="#pricing" data-page-link="pricing" class="block nav-link text-left py-3 px-4 border-b border-gray-100 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">Pricing</a>
-            <a href="#notify" data-page-link="notify" class="block nav-link text-left py-3 px-4 border-b border-gray-100 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">Notify Me</a>
-            <a href="#about" data-page-link="about" class="block nav-link text-left py-3 px-4 border-b border-gray-100 dark:border-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">About</a>
-            <a href="#gallery" data-page-link="gallery" class="block nav-link text-left py-3 px-4 hover:bg-indigo-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">Gallery</a>
-        </div>
-    </nav>
+.page-content { display: none; animation: fadeInPage 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+.page-content.active { display: block; }
+@keyframes fadeInPage { 0% { opacity: 0; transform: translateY(25px); } 100% { opacity: 1; transform: translateY(0); } }
 
-    <div id="page-container" class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+.nav-link { padding: 0.6rem 1.1rem; border-radius: 0.375rem; transition: background-color 0.3s ease, color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease; font-weight: 500; display: inline-block;}
+.nav-link.active { background-color: #4f46e5; color: #ffffff; box-shadow: 0 4px 8px rgba(79,70,229,0.2); transform: translateY(-2px); }
+/* Light mode nav link hover */
+html:not(.dark) .nav-link:not(.active):hover { background-color: #eef2ff; color: #4338ca; }
+/* Dark mode nav link hover */
+html.dark .nav-link:not(.active):hover { background-color: #3730a3; color: #e0e7ff; }
+html.dark .nav-link.active { background-color: #6366f1; color: #ffffff; }
 
-        <section id="home" class="page-content" data-title="Home - Your Ultimate Study Companion">
-            <header class="text-center py-12 md:py-16 scroll-reveal">
-                <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-5 text-gray-900 dark:text-white">
-                    <span class="hero-title-gradient">Ditch the Study Chaos.</span><br>
-                    <span class="block text-indigo-600 dark:text-indigo-400 mt-2 md:mt-3">Unleash Your Genius with NoteFlow.</span>
-                </h1>
-                <p class="text-base font-semibold uppercase tracking-wider text-indigo-500 dark:text-indigo-400 mb-6">Exclusively for Windows</p>
-                <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-12">
-                    Is your brain drowning in scattered notes and endless to-do lists? It's time to stop surviving your studies and start conquering them. NoteFlow is the all-in-one Windows command center for academic victory.
-                </p>
-                <button id="main-cta-button" class="btn-coming-soon">NoteFlow - Coming Soon!</button>
-                <p class="notify-prompt dark:text-gray-400">Be the first to know! <a href="#notify" data-page-link="notify" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">Sign up for launch updates!</a></p>
-            </header>
+#mobile-menu { transition: max-height 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); max-height: 0; opacity:0; overflow: hidden; transform: translateY(-15px); }
+#mobile-menu.open { max-height: 500px; opacity:1; transform: translateY(0); }
 
-            <main>
-                <section id="features-showcase" class="py-12 md:py-16 scroll-reveal">
-                    <div class="text-center mb-16">
-                        <h2 class="section-title">Your Integrated Academic Toolkit</h2>
-                        <p class="section-subtitle">Explore how NoteFlow replaces clutter with clarity on your Windows PC. All features, one powerful app.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                        <div id="notes-feature" class="feature-section flex flex-col scroll-reveal">
-                            <div class="mb-4 text-3xl">🗒️</div><h3 class="text-2xl font-bold mb-3">Unmatched Note Organization</h3>
-                            <p class="mb-6 flex-grow">Say goodbye to messy files. Structure notes by subject and topic, finding anything in seconds.</p>
-                            <div class="bg-slate-100 dark:bg-gray-700 p-6 rounded-lg border border-slate-200 dark:border-gray-600 shadow-sm mt-auto">
-                                <ul class="space-y-2"><li class="font-semibold text-lg text-slate-700 dark:text-slate-200">▾ Subjects</li>
-                                    <ul class="pl-6 space-y-1 text-slate-600 dark:text-slate-300"><li class="bg-indigo-100 dark:bg-indigo-700 p-3 rounded-md font-semibold text-indigo-700 dark:text-indigo-200">▾ Mathematics</li>
-                                        <ul class="pl-6 pt-2 space-y-1.5"><li class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-gray-600 transition-colors text-slate-700 dark:text-slate-300">Algebra</li><li class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-gray-600 transition-colors text-slate-700 dark:text-slate-300">Calculus</li><li class="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-gray-600 transition-colors text-slate-700 dark:text-slate-300">Statistics</li></ul>
-                                    <li class="font-semibold p-3 rounded-md mt-1 hover:bg-slate-200 dark:hover:bg-gray-600 transition-colors text-slate-700 dark:text-slate-300">▾ History</li></ul>
-                                </ul>
-                            </div>
-                        </div>
-                        <div id="todos-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.1s;">
-                            <div class="mb-4 text-3xl">✅</div><h3 class="text-2xl font-bold mb-3">A To-Do List That Works</h3>
-                            <p class="mb-6 flex-grow">Break down projects, track progress, and never miss a deadline. Watch the bar update!</p>
-                            <div class="mt-auto"><div class="mb-4"><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Project Progress</label><div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-5"><div id="progress-bar" class="bg-indigo-500 dark:bg-indigo-400 h-5 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div></div></div>
-                                <div class="space-y-3"><div class="bg-slate-50 dark:bg-gray-700 p-3 rounded-lg border border-slate-200 dark:border-gray-600 todo-item-container"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"><span class="ml-3 text-gray-700 dark:text-gray-200">History Essay</span></label><div class="pl-8 mt-1 text-xs space-y-1"><label class="flex items-center todo-item-container"><input type="checkbox" class="todo-item h-4 w-4 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400"><span class="ml-2 text-gray-500 dark:text-gray-400">Research</span></label><label class="flex items-center todo-item-container"><input type="checkbox" class="todo-item h-4 w-4 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400"><span class="ml-2 text-gray-500 dark:text-gray-400">Outline</span></label></div></div>
-                                <div class="bg-slate-50 dark:bg-gray-700 p-3 rounded-lg border border-slate-200 dark:border-gray-600 todo-item-container"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 dark:border-gray-500 text-indigo-600 dark:text-indigo-400"><span class="ml-3 text-gray-700 dark:text-gray-200">Calculus Exam Prep</span></label></div></div>
-                            </div>
-                        </div>
-                        <div id="flashcards-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.2s;">
-                            <div class="mb-4 text-3xl">🧠</div><h3 class="text-2xl font-bold mb-3">Revision on Autopilot</h3>
-                            <p class="mb-6 flex-grow">Turn notes into revision tools. Create flashcards to lock in concepts. Click to flip!</p>
-                            <div id="flashcard-demo" class="flashcard h-56 w-full max-w-sm mx-auto cursor-pointer perspective-1000 mt-auto">
-                                <div class="flashcard-inner">
-                                    <div class="flashcard-front shadow-md bg-slate-100 text-slate-800 border border-slate-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
-                                        <p class="text-gray-500 dark:text-gray-400 text-xs mb-2 uppercase tracking-wider">Subject: CompSci</p>
-                                        <h4 class="text-lg font-semibold text-slate-800 dark:text-gray-200">CPU Primary Function?</h4>
-                                    </div>
-                                    <div class="flashcard-back shadow-md bg-indigo-100 text-indigo-700 border border-indigo-300 dark:bg-indigo-700 dark:border-indigo-500 dark:text-indigo-100">
-                                        <h4 class="text-lg font-semibold text-indigo-700 dark:text-indigo-100">Execute program instructions.</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="timer-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.05s;">
-                            <div class="mb-4 text-3xl">⏱️</div><h3 class="text-2xl font-bold mb-3">Harness Deep Focus</h3>
-                            <p class="mb-6 flex-grow">Use the Pomodoro Technique for focused sprints. Eliminate distractions, get more done.</p>
-                            <div id="pomodoro-card" class="text-center bg-slate-100 dark:bg-gray-700 p-6 rounded-xl border border-slate-200 dark:border-gray-600 shadow-sm mt-auto"><div id="pomodoro-display" class="text-5xl font-bold text-indigo-600 dark:text-indigo-400 mb-3 tabular-nums">25:00</div><p id="pomodoro-status" class="text-gray-600 dark:text-gray-400 mb-4 text-sm">Ready to focus?</p><button id="pomodoro-btn" class="bg-indigo-600 dark:bg-indigo-500 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Start Focus</button></div>
-                        </div>
-                        <div id="mindfulness-feature" class="feature-section flex flex-col col-span-1 md:col-span-2 lg:col-span-1 scroll-reveal" style="transition-delay: 0.15s;">
-                             <div class="mb-4 text-3xl">🧘</div><h3 class="text-2xl font-bold mb-3">Find Your Calm Center</h3>
-                            <p class="mb-6 flex-grow">Academic pressure is real. Reset with a simple breathing exercise. Your brain will thank you.</p>
-                            <div class="text-center bg-slate-100 dark:bg-gray-700 p-6 rounded-xl border border-slate-200 dark:border-gray-600 shadow-sm mt-auto flex flex-col items-center justify-center min-h-[240px]"><div id="breathing-circle" class="breathing-circle mb-6"></div><p id="breathing-text" class="text-gray-600 dark:text-gray-400 mb-5 text-sm">Inhale... Exhale...</p<button id="mindfulness-btn" class="bg-indigo-600 dark:bg-indigo-500 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Begin Breathing</button></div>
-                        </div>
-                    </div>
-                </section>
-                
-                <section id="benefits" class="py-12 md:py-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg my-12 scroll-reveal">
-                    <div class="text-center mb-12 px-6"><h2 class="section-title">The NoteFlow Advantage</h2><p class="section-subtitle">It's more than just features. It's about building a better study system for your Windows setup.</p></div>
-                    <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-x-8 gap-y-12 text-center px-6">
-                        <div class="p-6 hover:shadow-xl dark:hover:shadow-indigo-500/20 transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500 dark:text-indigo-400">🚀</div><h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">Study Smarter, Not Harder</h3><p class="text-gray-600 dark:text-gray-400 text-base">An integrated workflow means less time switching between apps and more time learning.</p></div>
-                        <div class="p-6 hover:shadow-xl dark:hover:shadow-indigo-500/20 transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500 dark:text-indigo-400">💡</div><h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">Gain Deeper Understanding</h3><p class="text-gray-600 dark:text-gray-400 text-base">Connect your notes, tasks, and revision to see the big picture and reinforce knowledge.</p></div>
-                        <div class="p-6 hover:shadow-xl dark:hover:shadow-indigo-500/20 transition-shadow duration-300 rounded-lg"><div class="text-5xl mb-5 text-indigo-500 dark:text-indigo-400">🧘</div><h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">Reduce Stress & Overwhelm</h3><p class="text-gray-600 dark:text-gray-400 text-base">Feel in complete control of your academic life with a system that keeps everything organized.</p></div>
-                    </div>
-                </section>
-                                
-                <section id="comparison" class="py-12 md:py-16 scroll-reveal">
-                     <div class="text-center mb-12 px-6"><h2 class="section-title">Stop Juggling. Start Integrating.</h2><p class="section-subtitle">See how a typical study day changes with NoteFlow. More time focusing, less time wasted.</p></div>
-                    <div class="chart-container"><canvas id="studyChart"></canvas></div>
-                </section>
+.feature-section { 
+    border-radius: 1rem; padding: 2rem; 
+    margin-bottom: 2rem; 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease; 
+    border: 1px solid transparent;
+}
+.feature-section:hover { transform: translateY(-12px) scale(1.02); }
+html:not(.dark) .feature-section { background-color: #ffffff; box-shadow: 0 10px 20px -8px rgba(0,0,0,0.03), 0 4px 8px -5px rgba(0,0,0,0.02); }
+html:not(.dark) .feature-section:hover { box-shadow: 0 22px 40px -12px rgba(0,0,0,0.1), 0 12px 22px -10px rgba(0,0,0,0.08); border-color: #c7d2fe;}
+html.dark .feature-section { background-color: #1f2937; border-color: #374151; box-shadow: 0 10px 20px -8px rgba(0,0,0,0.2), 0 4px 8px -5px rgba(0,0,0,0.15);}
+html.dark .feature-section:hover { border-color: #4f46e5; box-shadow: 0 22px 40px -12px rgba(0,0,0,0.3), 0 12px 22px -10px rgba(0,0,0,0.25); }
 
-                <section id="purchase-section" class="text-center py-16 md:py-24 bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-xl mt-16 shadow-2xl scroll-reveal">
-                     <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-5 text-white">Ready to Elevate Your Studies on Windows?</h2>
-                    <p class="max-w-3xl mx-auto text-lg md:text-xl text-indigo-100 mb-10 px-6">Invest in your academic future. Get lifetime access to every feature with a simple, one-time purchase. No subscriptions. No hidden fees.</p>
-                     <button class="btn-coming-soon-lg">NoteFlow - Coming Soon!</button>
-                     <p class="mt-8 text-sm notify-prompt-dark-bg"> 
-                        NoteFlow is exclusively designed for Windows.<br>
-                        Be the first to know! 
-                        <a href="#notify" data-page-link="notify">Sign up for launch updates!</a>
-                    </p>
-                </section>
-            </main>
-        </section>
+.flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.75s cubic-bezier(0.25, 0.8, 0.25, 1); transform-style: preserve-3d; }
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 1.5rem; border-radius: 0.75rem; }
 
-        <section id="pricing" class="page-content py-10" data-title="Pricing - Simple & Affordable">
-            <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "WebPage",
-              "name": "NoteFlow Pricing",
-              "url": "YOUR_MAIN_URL_HERE#pricing",
-              "description": "Simple and affordable one-time purchase for NoteFlow, the ultimate Windows study app. Get lifetime access for just $5.",
-              "mainEntity": {
-                "@type": "Product",
-                "name": "NoteFlow Pro",
-                "description": "Lifetime access to NoteFlow with all features included.",
-                "image": "YOUR_APP_ICON_OR_LOGO_URL_HERE", 
-                "brand": { "@type": "Brand", "name": "NoteFlow" },
-                "offers": { "@type": "Offer", "price": "5.00", "priceCurrency": "USD", "availability": "https://schema.org/ComingSoon", "seller": { "@type": "Organization", "name": "NoteFlow Team" } }
-              }
-            }
-            </script>
-            <div class="max-w-4xl mx-auto px-4 scroll-reveal">
-                <h2 class="page-title">NoteFlow Pricing</h2>
-                <p class="page-text">
-                    Unlock all the powerful features of NoteFlow with a simple, one-time purchase. No subscriptions, no recurring fees – just lifetime access to your ultimate study companion for Windows.
-                </p>
-                <div class="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-xl max-w-md mx-auto text-center border-2 border-indigo-500 dark:border-indigo-400 transform hover:scale-105 transition-transform duration-300">
-                    <h3 class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">NoteFlow Pro</h3>
-                    <p class="text-gray-500 dark:text-gray-400 text-lg mb-6">Lifetime Access</p>
-                    <p class="text-6xl font-extrabold text-gray-800 dark:text-gray-100 mb-6">$5<span class="text-2xl font-normal text-gray-500 dark:text-gray-400">.00</span></p>
-                    <p class="text-gray-600 dark:text-gray-300 mb-8">One-time payment. All features included. Future updates free.</p>
-                    <ul class="text-left space-y-3 text-gray-700 dark:text-gray-300 mb-10">
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Organized Notes (Subjects & Topics)</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Sophisticated To-Do List</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Flashcards for Revision</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Pomodoro Study Timer</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Mindfulness Breathing Exercises</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Exclusively for Windows</li>
-                        <li class="flex items-center"><span class="text-green-500 dark:text-green-400 mr-2 text-xl">✔</span> Lifetime Updates</li>
-                    </ul>
-                    <button class="w-full btn-coming-soon text-lg">Coming Soon!</button>
-                    <p class="notify-prompt dark:text-gray-400">Get ready! <a href="#notify" data-page-link="notify" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">Sign up for launch news!</a></p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="notify" class="page-content py-10" data-title="Get Notified - NoteFlow Launch">
-             <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "WebPage",
-              "name": "Get Notified for NoteFlow Launch",
-              "url": "YOUR_MAIN_URL_HERE#notify",
-              "description": "Sign up to be the first to know when NoteFlow for Windows launches on the Microsoft Store."
-            }
-            </script>
-            <div class="max-w-4xl mx-auto px-4 scroll-reveal">
-                <h2 class="page-title">Be The First to Know!</h2>
-                <p class="page-text mb-10">
-                    NoteFlow is gearing up for launch! We're putting the final touches on the ultimate study app for Windows. 
-                    Sign up below with your email address to receive an exclusive notification the moment NoteFlow is live on the Microsoft Store. 
-                    You'll also be eligible for any early-bird specials we might announce!
-                </p>
-                <div class="iframe-container bg-white dark:bg-gray-700">
-                    <iframe width="640px" height="480px" src="https://forms.microsoft.com/r/S1Jt5s0zM1?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
-                </div>
-                 <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-8">
-                    We respect your privacy. Your email will only be used to notify you about the NoteFlow launch.
-                </p>
-            </div>
-        </section>
+.breathing-circle { width: 100px; height: 100px; border-radius: 50%; background-color: #6366f1; transition: all 2.5s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
+.breathing-circle.breathing { animation: breathe 5s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite; }
+@keyframes breathe { 0%, 100% { transform: scale(0.95); opacity: 0.6; } 50% { transform: scale(1.2); opacity: 1; } }
 
-        <section id="about" class="page-content py-10" data-title="About NoteFlow">
-            <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "WebPage",
-              "name": "About NoteFlow",
-              "url": "YOUR_MAIN_URL_HERE#about",
-              "description": "Learn about the mission and vision behind NoteFlow, the all-in-one study application for Windows.",
-              "mainEntity": { "@type": "Organization", "name": "NoteFlow Team", "description": "Creators of NoteFlow, dedicated to helping students study smarter on Windows.", "url": "YOUR_MAIN_URL_HERE" }
-            }
-            </script>
-             <div class="max-w-4xl mx-auto px-4 scroll-reveal">
-                <h2 class="page-title">About NoteFlow</h2>
-                <div class="bg-white dark:bg-gray-800 p-8 md:p-10 rounded-xl shadow-xl text-gray-700 dark:text-gray-300 space-y-6 text-lg leading-relaxed">
-                    <p>
-                        NoteFlow was born from a simple idea: studying should be organized, focused, and less stressful. As students ourselves, we juggled countless apps – one for notes, another for to-do lists, separate timers, and flashcard apps. It was chaotic and inefficient.
-                    </p>
-                    <p>
-                        We envisioned a single, powerful application specifically for Windows users that integrates all essential study tools into one seamless experience. NoteFlow is the result of that vision.
-                    </p>
-                    <p>
-                        Our mission is to empower students like you to achieve academic success by providing a tool that not only helps you manage your workload but also promotes better study habits and well-being. We believe that with the right tools, anyone can unlock their full academic potential.
-                    </p>
-                    <p>
-                        NoteFlow is built with care, focusing on a clean interface, robust features, and the promise of a one-time purchase for lifetime value. We're committed to continuously improving NoteFlow and supporting our community of learners.
-                    </p>
-                    <p class="font-semibold text-indigo-600 dark:text-indigo-400 mt-8">Thank you for choosing NoteFlow!</p>
-                </div>
-            </div>
-        </section>
+.chart-container { position: relative; width: 100%; max-width: 750px; margin-left: auto; margin-right: auto; height: 380px; max-height: 450px; padding: 1.5rem; border-radius: 1rem; }
+@media (min-width: 768px) { .chart-container { height: 420px; } }
+html:not(.dark) .chart-container { background-color: #ffffff; box-shadow: 0 10px 20px -8px rgba(0,0,0,0.03), 0 4px 8px -5px rgba(0,0,0,0.02); }
+html.dark .chart-container { background-color: #1f2937; box-shadow: 0 10px 20px -8px rgba(0,0,0,0.2), 0 4px 8px -5px rgba(0,0,0,0.15); }
 
-        <section id="gallery" class="page-content py-10" data-title="Gallery - NoteFlow in Action">
-            <div class="max-w-4xl mx-auto px-4 scroll-reveal">
-                <h2 class="page-title">NoteFlow Gallery</h2>
-                <p class="page-text">
-                    Welcome to the NoteFlow Gallery! Get a sneak peek of NoteFlow's clean interface and powerful features designed to enhance your study experience on Windows. More visuals coming soon!
-                </p>
-                <div class="bg-gradient-to-tr from-indigo-100 via-purple-100 to-pink-100 dark:from-indigo-900 dark:via-purple-800 dark:to-pink-700 p-8 md:p-16 rounded-xl shadow-xl text-center min-h-[350px] flex flex-col justify-center items-center border-2 border-dashed border-indigo-300 dark:border-indigo-600 transform hover:scale-102 transition-transform duration-500 ease-out">
-                    <span class="text-7xl mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 gallery-placeholder-text" style="animation-duration: 4s;">🖼️✨🚀</span>
-                    <p class="text-3xl text-gray-700 dark:text-gray-200 font-semibold gallery-placeholder-text" style="animation-delay: 0.2s; animation-duration: 4s;">Visuals Loading Soon...</p>
-                    <p class="text-gray-500 dark:text-gray-400 mt-3 text-lg gallery-placeholder-text" style="animation-delay: 0.4s; animation-duration: 4s;">We're polishing up some great screenshots to show you NoteFlow in all its glory!</p>
-                </div>
-            </div>
-        </section>
+.btn-primary { background-color: #4f46e5; color: #ffffff; font-semibold; padding-top: 0.875rem; padding-bottom: 0.875rem; padding-left: 2.25rem; padding-right: 2.25rem; border-radius: 0.5rem; text-lg; transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; box-shadow: 0 4px 10px -2px rgba(79, 70, 229, 0.4), 0 2px 6px -2px rgba(79, 70, 229, 0.3); }
+.btn-primary:hover { background-color: #4338ca; box-shadow: 0 10px 20px -3px rgba(79, 70, 229, 0.5), 0 4px 8px -2px rgba(79, 70, 229, 0.4); transform: translateY(-2px) scale(1.03); }
 
-    </div>
+.btn-coming-soon { font-semibold; padding-top: 0.875rem; padding-bottom: 0.875rem; padding-left: 2.25rem; padding-right: 2.25rem; border-radius: 0.5rem; text-lg; cursor: default; opacity: 1; border: 1px; animation: pulseComingSoon 2.2s infinite cubic-bezier(0.66, 0, 0, 1); }
+.btn-coming-soon-lg { font-bold; padding-top: 1rem; padding-bottom: 1rem; padding-left: 3rem; padding-right: 3rem; border-radius: 0.5rem; font-size: 1.25rem; line-height: 1.75rem; cursor: default; opacity: 1; border: 1px; animation: pulseComingSoon 2.2s infinite cubic-bezier(0.66, 0, 0, 1); }
+html:not(.dark) .btn-coming-soon, html:not(.dark) .btn-coming-soon-lg { background-color: #c7d2fe; color: #4338ca; border-color: #a5b4fc; }
+html.dark .btn-coming-soon, html.dark .btn-coming-soon-lg { background-color: #4338ca; color: #c7d2fe; border-color: #6366f1; }
+@keyframes pulseComingSoon { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(165, 180, 252, 0.6); } 50% { transform: scale(1.02); box-shadow: 0 0 0 12px rgba(165, 180, 252, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(165, 180, 252, 0); } }
 
-    <footer class="text-center py-12 mt-8 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors duration-300">
-        <div class="container mx-auto px-4">
-            <div class="mb-6">
-                <a href="#" class="social-icon" aria-label="NoteFlow on Twitter (Placeholder)">🐦</a>
-                <a href="#" class="social-icon" aria-label="NoteFlow on Facebook (Placeholder)">👍</a>
-                <a href="#" class="social-icon" aria-label="NoteFlow on Instagram (Placeholder)">📸</a>
-                 <a href="#" class="social-icon" aria-label="NoteFlow on LinkedIn (Placeholder)">🔗</a>
-            </div>
-            <div class="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                <a href="#" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mx-2">Privacy Policy</a> | 
-                <a href="#" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mx-2">Terms of Service</a> |
-                <a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mx-2">Contact Us (Placeholder)</a>
-            </div>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">&copy; <span id="currentYear"></span> NoteFlow. All rights reserved. The Ultimate Study App for Windows.</p>
-        </div>
-    </footer>
+.section-title { font-size: 2.5rem; line-height: 2.75rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+html:not(.dark) .section-title { color: #1f2937; }
+html.dark .section-title { color: #f3f4f6; }
+.section-subtitle { font-size: 1.125rem; line-height: 1.75rem; max-width: 48rem; margin-left:auto; margin-right:auto; margin-bottom: 3.5rem; }
+html:not(.dark) .section-subtitle { color: #4b5563; }
+html.dark .section-subtitle { color: #9ca3af; }
+.page-title { font-size: 2.75rem; line-height: 3rem; font-weight: 800; margin-bottom: 1.5rem; text-align: center;}
+html:not(.dark) .page-title { color: #1a202c; }
+html.dark .page-title { color: #f9fafb; }
+.page-text { font-size: 1.125rem; line-height: 1.75rem; margin-bottom: 2.5rem; text-align: center; max-width: 3xl; margin-left: auto; margin-right: auto;}
+html:not(.dark) .page-text { color: #4a5568; }
+html.dark .page-text { color: #a1a1aa; }
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const siteBaseTitle = "NoteFlow";
-            const pageTitles = {
-                home: "Home - Your Ultimate Study Companion",
-                pricing: "Pricing - Simple & Affordable",
-                notify: "Get Notified - NoteFlow Launch",
-                about: "About NoteFlow",
-                gallery: "Gallery - NoteFlow in Action"
-            };
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
+.pomodoro-active-pulse { animation: pulseBorderPomodoro 1.5s ease-out; }
+@keyframes pulseBorderPomodoro { 0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.5); } 70% { box-shadow: 0 0 0 12px rgba(79, 70, 229, 0); } 100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); } }
 
-            const mainUrl = (window.location.origin + window.location.pathname).replace(/\/$/, "");
-            const mainStructuredDataScript = document.getElementById('structured-data-main');
-            if (mainStructuredDataScript) {
-                 try {
-                    const mainJsonLd = JSON.parse(mainStructuredDataScript.textContent);
-                    if(mainJsonLd.mainEntityOfPage) mainJsonLd.mainEntityOfPage['@id'] = mainUrl + '#home';
-                    if(mainJsonLd.offers && mainJsonLd.offers.seller && mainJsonLd.offers.seller.url) mainJsonLd.offers.seller.url = mainUrl;
-                    mainStructuredDataScript.textContent = JSON.stringify(mainJsonLd);
-                } catch (e) { console.error("Error parsing main structured data", e); }
-            }
-            document.querySelectorAll('section.page-content script[type="application/ld+json"]').forEach(script => {
-                try {
-                    const jsonLd = JSON.parse(script.textContent);
-                    if(jsonLd.url) jsonLd.url = mainUrl + jsonLd.url.substring(jsonLd.url.indexOf('#'));
-                    if(jsonLd.mainEntity && jsonLd.mainEntity.url) jsonLd.mainEntity.url = mainUrl;
-                    script.textContent = JSON.stringify(jsonLd);
-                } catch (e) { console.error("Error parsing page specific structured data", e); }
-            });
+.todo-item-checked-flash { animation: flashBackgroundTodo 0.7s ease-out; }
+@keyframes flashBackgroundTodo { 0% { background-color: rgba(165, 243, 196, 0.6); transform: scale(1.02); } 100% { background-color: transparent; transform: scale(1); } }
+html.dark .todo-item-checked-flash { animation: flashBackgroundTodoDark 0.7s ease-out; }
+@keyframes flashBackgroundTodoDark { 0% { background-color: rgba(34, 197, 94, 0.4); transform: scale(1.02); } 100% { background-color: transparent; transform: scale(1); } }
 
-            const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.05 }); 
+.social-icon { font-size: 1.85rem; margin: 0 0.6rem; transition: color 0.25s ease-in-out, transform 0.25s ease-in-out; display: inline-block;}
+html:not(.dark) .social-icon { color: #6b7280; }
+html.dark .social-icon { color: #9ca3af; }
+.social-icon:hover { transform: scale(1.25) translateY(-3px) rotate(5deg); }
+html:not(.dark) .social-icon:hover { color: #4f46e5; }
+html.dark .social-icon:hover { color: #818cf8; }
 
-            scrollRevealElements.forEach(el => {
-                revealObserver.observe(el);
-            });
+.hero-title-gradient { -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: heroGradientShift 8s ease infinite; background-size: 300% 300%;}
+html:not(.dark) .hero-title-gradient { background: linear-gradient(60deg, #4f46e5, #a855f7, #ec4899, #f59e0b); }
+html.dark .hero-title-gradient { background: linear-gradient(60deg, #818cf8, #c084fc, #f472b6, #fbbf24); }
+@keyframes heroGradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
-            const pageLinks = document.querySelectorAll('[data-page-link]');
-            const pageContents = document.querySelectorAll('.page-content');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIconOpen = document.getElementById('menu-icon-open');
-            const menuIconClose = document.getElementById('menu-icon-close');
-            const themeToggleButton = document.getElementById('theme-toggle-button');
-            const themeToggleButtonMobile = document.getElementById('theme-toggle-button-mobile');
-            const sunIcon = document.getElementById('theme-icon-sun');
-            const moonIcon = document.getElementById('theme-icon-moon');
-            const sunIconMobile = document.getElementById('theme-icon-sun-mobile');
-            const moonIconMobile = document.getElementById('theme-icon-moon-mobile');
-            let studyChartInstance = null;
+.scroll-reveal { opacity: 0; transform: translateY(30px) scale(0.97); transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.scroll-reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
 
+.notify-prompt { margin-top: 1rem; font-size: 0.9rem; }
+html:not(.dark) .notify-prompt { color: #4b5563; }
+html.dark .notify-prompt { color: #9ca3af; }
+.notify-prompt-dark-bg { margin-top: 1rem; font-size: 0.9rem; color: #e0e7ff; } /* For text on dark gradient backgrounds */
+.notify-prompt a, .notify-prompt-dark-bg a { text-decoration: none; font-weight: 600; transition: color 0.2s ease, text-decoration 0.2s ease, border-bottom-color 0.2s ease; border-bottom: 1px solid transparent;}
+html:not(.dark) .notify-prompt a { color: #4f46e5; }
+html:not(.dark) .notify-prompt a:hover { color: #3730a3; border-bottom-color: #6366f1; }
+html.dark .notify-prompt a { color: #818cf8; } 
+html.dark .notify-prompt a:hover { color: #a5b4fc; border-bottom-color: #818cf8; }
+.notify-prompt-dark-bg a { color: #ffffff; } 
+.notify-prompt-dark-bg a:hover { color: #c7d2fe; border-bottom-color: #a5b4fc; } 
 
-            function applyTheme(theme) {
-                if (theme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                    document.documentElement.classList.remove('light');
-                    if(sunIcon) sunIcon.classList.remove('hidden');
-                    if(moonIcon) moonIcon.classList.add('hidden');
-                    if(sunIconMobile) sunIconMobile.classList.remove('hidden');
-                    if(moonIconMobile) moonIconMobile.classList.add('hidden');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    document.documentElement.classList.add('light');
-                    if(sunIcon) sunIcon.classList.add('hidden');
-                    if(moonIcon) moonIcon.classList.remove('hidden');
-                    if(sunIconMobile) sunIconMobile.classList.add('hidden');
-                    if(moonIconMobile) moonIconMobile.classList.remove('hidden');
-                }
-                updateChartTheme(theme);
-            }
+.gallery-placeholder-text { animation: galleryTextAnim 3s infinite alternate ease-in-out; }
+@keyframes galleryTextAnim { 0% { transform: translateY(0px) scale(1); opacity: 0.8; } 50% { transform: translateY(-5px) scale(1.02); opacity: 1; } 100% { transform: translateY(0px) scale(1); opacity: 0.8; } }
 
-            function toggleTheme() {
-                const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                localStorage.setItem('theme', newTheme);
-                applyTheme(newTheme);
-            }
+.iframe-container { position: relative; overflow: hidden; width: 100%; padding-top: 75%; max-width: 700px; margin-left: auto; margin-right: auto; border-radius: 0.75rem; }
+html:not(.dark) .iframe-container { background-color: #ffffff; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+html.dark .iframe-container { background-color: #1f2937; box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
+.iframe-container iframe { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: none; }
+@media (max-width: 640px) { .iframe-container { padding-top: 100%; } }
 
-            if (themeToggleButton) themeToggleButton.addEventListener('click', toggleTheme);
-            if (themeToggleButtonMobile) themeToggleButtonMobile.addEventListener('click', toggleTheme);
-            
-            const preferredTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            applyTheme(preferredTheme);
-
-
-            if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose) {
-                mobileMenuButton.addEventListener('click', () => {
-                    const isOpen = mobileMenu.classList.toggle('open');
-                    mobileMenuButton.setAttribute('aria-expanded', isOpen.toString());
-                    menuIconOpen.classList.toggle('hidden', isOpen);
-                    menuIconClose.classList.toggle('hidden', !isOpen);
-                });
-            }
-            
-            function showPage(pageId) {
-                pageContents.forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                let pageTitle = siteBaseTitle; 
-                const targetPage = document.getElementById(pageId);
-                if (targetPage) {
-                    targetPage.classList.add('active');
-                    pageTitle = pageTitles[pageId] || `${siteBaseTitle} - ${pageId.charAt(0).toUpperCase() + pageId.slice(1)}`;
-                }
-                document.title = pageTitle;
-
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    const isActive = link.getAttribute('href').substring(1) === pageId;
-                    link.classList.toggle('active', isActive);
-                    if (isActive) {
-                        link.setAttribute('aria-current', 'page');
-                    } else {
-                        link.removeAttribute('aria-current');
-                    }
-                });
-                 if (window.location.hash.substring(1) !== pageId || !window.location.hash) {
-                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else if (window.location.hash.substring(1) === pageId && window.scrollY > 100) {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else if (!window.location.hash && pageId ==='home' && window.scrollY > 100) {
-                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            }
-
-            function handleRouteChange() {
-                let hash = window.location.hash.substring(1);
-                if (!hash || !document.getElementById(hash)) {
-                    hash = 'home'; 
-                    if (window.location.hash !== '' && window.location.hash !== '#home') { 
-                         window.history.replaceState(null, null, '#home'); 
-                    }
-                }
-                showPage(hash);
-            }
-
-            pageLinks.forEach(link => {
-                link.addEventListener('click', (event) => {
-                    if (mobileMenu && mobileMenu.classList.contains('open')) {
-                        mobileMenu.classList.remove('open');
-                        mobileMenuButton.setAttribute('aria-expanded', 'false');
-                        menuIconOpen.classList.remove('hidden');
-                        menuIconClose.classList.add('hidden');
-                    }
-                });
-            });
-            
-            window.addEventListener('hashchange', handleRouteChange);
-            handleRouteChange(); 
-
-            const todoItems = document.querySelectorAll('.todo-item');
-            const progressBar = document.getElementById('progress-bar');
-            
-            function updateProgress() {
-                const totalTodos = todoItems.length;
-                if (totalTodos === 0 || !progressBar) return; 
-                const checkedTodos = document.querySelectorAll('.todo-item:checked').length;
-                const percentage = (checkedTodos / totalTodos) * 100;
-                progressBar.style.width = `${percentage}%`;
-            }
-
-            todoItems.forEach(item => {
-                item.addEventListener('change', () => {
-                    updateProgress();
-                    const container = item.closest('.todo-item-container');
-                    if (item.checked && container) {
-                        container.classList.add('todo-item-checked-flash');
-                        setTimeout(() => container.classList.remove('todo-item-checked-flash'), 700);
-                    }
-                });
-            });
-            updateProgress();
-            
-            const flashcardDemo = document.getElementById('flashcard-demo');
-            if (flashcardDemo) {
-                flashcardDemo.addEventListener('click', function() { this.classList.toggle('flipped'); });
-            }
-            
-            const pomodoroBtn = document.getElementById('pomodoro-btn');
-            const pomodoroDisplay = document.getElementById('pomodoro-display');
-            const pomodoroStatus = document.getElementById('pomodoro-status');
-            const pomodoroCard = document.getElementById('pomodoro-card');
-            let isPomodoroRunning = false;
-            let pomodoroInterval;
-            let pomodoroDuration = 25 * 60;
-            
-            if (pomodoroBtn) {
-                pomodoroBtn.addEventListener('click', () => {
-                    if (isPomodoroRunning) {
-                        clearInterval(pomodoroInterval);
-                        if(pomodoroStatus) pomodoroStatus.textContent = 'Session paused.';
-                        if(pomodoroBtn) pomodoroBtn.textContent = 'Resume Focus';
-                        isPomodoroRunning = false;
-                        if(pomodoroCard) pomodoroCard.classList.remove('pomodoro-active-pulse');
-                    } else {
-                        isPomodoroRunning = true;
-                        if(pomodoroBtn) pomodoroBtn.textContent = 'Pause Session';
-                        if(pomodoroStatus) pomodoroStatus.textContent = 'Focus time!';
-                        if(pomodoroCard) {
-                            pomodoroCard.classList.add('pomodoro-active-pulse');
-                            setTimeout(() => pomodoroCard.classList.remove('pomodoro-active-pulse'), 1500);
-                        }
-                        pomodoroInterval = setInterval(() => {
-                            let minutes = parseInt(pomodoroDuration / 60, 10);
-                            let seconds = parseInt(pomodoroDuration % 60, 10);
-                            minutes = minutes < 10 ? "0" + minutes : minutes;
-                            seconds = seconds < 10 ? "0" + seconds : seconds;
-                            if (pomodoroDisplay) pomodoroDisplay.textContent = minutes + ":" + seconds;
-                            if (--pomodoroDuration < 0) {
-                                clearInterval(pomodoroInterval);
-                                if (pomodoroDisplay) pomodoroDisplay.textContent = "🎉 Done!";
-                                if (pomodoroStatus) pomodoroStatus.textContent = "Great work! Time for a break.";
-                                if (pomodoroBtn) pomodoroBtn.textContent = 'Start New Session';
-                                pomodoroDuration = 25 * 60; 
-                                isPomodoroRunning = false; 
-                            }
-                        }, 1000);
-                    }
-                });
-            }
-
-            const mindfulnessBtn = document.getElementById('mindfulness-btn');
-            const breathingCircle = document.getElementById('breathing-circle');
-            const breathingText = document.getElementById('breathing-text');
-            
-            if (mindfulnessBtn) {
-                mindfulnessBtn.addEventListener('click', () => {
-                    if (breathingCircle) breathingCircle.classList.toggle('breathing');
-                    const isBreathing = breathingCircle ? breathingCircle.classList.contains('breathing') : false;
-                    if(mindfulnessBtn) mindfulnessBtn.textContent = isBreathing ? 'Stop Breathing' : 'Begin Breathing';
-                    if (breathingText) breathingText.textContent = isBreathing ? 'Follow the rhythm... Inhale... Exhale...' : 'Ready when you are.';
-                });
-            }
-
-            function getChartOptions(theme) {
-                const isDark = theme === 'dark';
-                const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : '#e5e7eb';
-                const tickColor = isDark ? '#9ca3af' : '#6b7280';
-                const titleColor = isDark ? '#f3f4f6' : '#1f2937';
-                const legendLabelColor = isDark ? '#d1d5db' : '#4b5563';
-
-                return {
-                    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-                    scales: { 
-                        x: { 
-                            stacked: true, 
-                            title: { display: true, text: 'Percentage of Study Time (%)', font: {size: 13, weight: '500'}, color: tickColor, padding: {top: 10} }, 
-                            grid: { display: false, drawBorder: false }, 
-                            ticks: { font: {size: 12}, color: tickColor, padding: 5} 
-                        },
-                        y: { 
-                            stacked: true, 
-                            grid: { color: gridColor, borderDash: [3, 3] }, 
-                            ticks: { font: {size: 13, weight: '500'}, color: tickColor, padding: 10} 
-                        }
-                    },
-                    plugins: { 
-                        tooltip: { 
-                            backgroundColor: isDark ? '#374151' : '#1f2937', 
-                            titleColor: isDark ? '#f3f4f6' : '#ffffff',
-                            bodyColor: isDark ? '#d1d5db' : '#e5e7eb',
-                            titleFont: { size: 14, weight: '600' }, 
-                            bodyFont: { size: 12 }, padding: 12, cornerRadius: 6, displayColors: false, 
-                            callbacks: { label: function(context) { return `${context.dataset.label}: ${context.raw}%`; } } 
-                        },
-                        title: { display: true, text: 'Typical Study Session Efficiency (Windows)', font: { size: 18, weight: '700' }, color: titleColor, padding: { top: 5, bottom: 25 } },
-                        legend: { position: 'bottom', labels: { font: {size: 13}, color: legendLabelColor, padding: 25, usePointStyle: true, pointStyle: 'rectRounded' } }
-                    },
-                    layout: { padding: { top: 5, bottom: 5, left: 5, right: 5 } }
-                };
-            }
-            
-            function updateChartTheme(theme) {
-                if (studyChartInstance) {
-                    studyChartInstance.options = getChartOptions(theme);
-                    studyChartInstance.update();
-                }
-            }
-
-            const chartCanvas = document.getElementById('studyChart');
-            if (chartCanvas) { 
-                const ctx = chartCanvas.getContext('2d');
-                studyChartInstance = new Chart(ctx, {
-                    type: 'bar', 
-                    data: { 
-                        labels: ['Scattered Apps Method', 'The NoteFlow Method'],
-                        datasets: [{ label: 'Focused Study Time', data: [60, 90], backgroundColor: 'rgba(79, 70, 229, 0.85)', borderColor: 'rgba(79, 70, 229, 1)', borderWidth: 1.5, borderRadius: 6, borderSkipped: false, },
-                                   { label: 'Time Wasted', data: [40, 10], backgroundColor: 'rgba(239, 68, 68, 0.75)', borderColor: 'rgba(239, 68, 68, 1)', borderWidth: 1.5, borderRadius: 6, borderSkipped: false, }]
-                    },
-                    options: getChartOptions(localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+#theme-toggle-button, #theme-toggle-button-mobile {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+html:not(.dark) #theme-toggle-button, html:not(.dark) #theme-toggle-button-mobile {
+    background-color: #e5e7eb; color: #4b5563;
+}
+html.dark #theme-toggle-button, html.dark #theme-toggle-button-mobile {
+    background-color: #374151; color: #e5e7eb;
+}
+#theme-toggle-button:hover, #theme-toggle-button-mobile:hover { transform: scale(1.1); }
