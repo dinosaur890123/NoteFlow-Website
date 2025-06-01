@@ -66,17 +66,20 @@
         .scroll-reveal { opacity: 0; transform: translateY(30px) scale(0.97); transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .scroll-reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
 
-        .notify-prompt { margin-top: 1rem; font-size: 0.9rem; color: #4b5563;}
-        .notify-prompt a { color: #4f46e5; text-decoration: none; font-weight: 600; transition: color 0.2s ease, text-decoration 0.2s ease, border-bottom-color 0.2s ease; border-bottom: 1px solid transparent;}
+        .notify-prompt { margin-top: 1rem; font-size: 0.9rem; color: #4b5563;} /* Default for light backgrounds */
+        .notify-prompt-dark-bg { margin-top: 1rem; font-size: 0.9rem; color: #e0e7ff; /* Light indigo for dark bg */ }
+        .notify-prompt a, .notify-prompt-dark-bg a { text-decoration: none; font-weight: 600; transition: color 0.2s ease, text-decoration 0.2s ease, border-bottom-color 0.2s ease; border-bottom: 1px solid transparent;}
+        .notify-prompt a { color: #4f46e5; }
         .notify-prompt a:hover { color: #3730a3; border-bottom-color: #6366f1; }
+        .notify-prompt-dark-bg a { color: #ffffff; } /* White link for dark bg */
+        .notify-prompt-dark-bg a:hover { color: #c7d2fe; border-bottom-color: #a5b4fc; } /* Lighter indigo hover for dark bg */
         
         .gallery-placeholder-text { animation: galleryTextAnim 3s infinite alternate ease-in-out; }
         @keyframes galleryTextAnim { 0% { transform: translateY(0px) scale(1); opacity: 0.8; } 50% { transform: translateY(-5px) scale(1.02); opacity: 1; } 100% { transform: translateY(0px) scale(1); opacity: 0.8; } }
         
-        .iframe-container { position: relative; overflow: hidden; width: 100%; padding-top: 75%; /* 4:3 Aspect Ratio */ max-width: 700px; margin-left: auto; margin-right: auto; border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+        .iframe-container { position: relative; overflow: hidden; width: 100%; padding-top: 75%; max-width: 700px; margin-left: auto; margin-right: auto; border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
         .iframe-container iframe { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: none; }
-        @media (max-width: 640px) { .iframe-container { padding-top: 100%; /* Adjust for smaller screens if form is taller */ } }
-
+        @media (max-width: 640px) { .iframe-container { padding-top: 100%; } }
 
     </style>
     <script type="application/ld+json" id="structured-data-main">
@@ -216,7 +219,11 @@
                      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-5 text-white">Ready to Elevate Your Studies on Windows?</h2>
                     <p class="max-w-3xl mx-auto text-lg md:text-xl text-indigo-100 mb-10 px-6">Invest in your academic future. Get lifetime access to every feature with a simple, one-time purchase. No subscriptions. No hidden fees.</p>
                      <button class="btn-coming-soon-lg">NoteFlow - Coming Soon!</button>
-                     <p class="text-indigo-200 mt-8 text-sm">NoteFlow is exclusively designed for Windows.<br><span class="notify-prompt text-indigo-100">Be the first to know! <a href="#notify" data-page-link="notify" class="text-white hover:text-indigo-200">Sign up for launch updates!</a></span></p>
+                     <p class="mt-8 text-sm notify-prompt-dark-bg"> {/* Changed class for specific styling */}
+                        NoteFlow is exclusively designed for Windows.<br>
+                        Be the first to know! 
+                        <a href="#notify" data-page-link="notify">Sign up for launch updates!</a>
+                    </p>
                 </section>
             </main>
         </section>
@@ -436,15 +443,11 @@
                         link.removeAttribute('aria-current');
                     }
                 });
-                // Only scroll to top if it's a true page change, not just a refresh on the same hash
-                // Check if the current scroll position is already near the top to avoid unnecessary scroll on initial load
-                if (window.scrollY > 100 && (window.location.hash.substring(1) !== pageId || !window.location.hash) ) {
+                 if (window.location.hash.substring(1) !== pageId || !window.location.hash) {
                      window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else if (window.location.hash.substring(1) === pageId && window.scrollY > 100) {
-                    // If on same hash but scrolled down, scroll to top
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else if (!window.location.hash && pageId ==='home' && window.scrollY > 100) {
-                    // Initial load on home, scrolled down (e.g. from refresh), scroll to top
                      window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             }
