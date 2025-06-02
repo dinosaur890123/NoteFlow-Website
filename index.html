@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoteFlow - The Ultimate Study App for Windows</title>
+    <title>NoteFlow - Windows Study App</title>
     <meta name="description" content="NoteFlow is the all-in-one Windows study app with organized notes, to-do lists, flashcards, Pomodoro timer, and mindfulness features. Sign up to get notified at launch!">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -303,13 +303,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             const siteBaseTitle = "NoteFlow";
             const pageTitles = {
-                home: "Home - Your Ultimate Study Companion",
-                pricing: "Pricing - Simple & Affordable",
-                notify: "Get Notified - NoteFlow Launch",
-                about: "About NoteFlow",
-                gallery: "Gallery - NoteFlow in Action"
+                home: "NoteFlow - Home",
+                pricing: "NoteFlow - Pricing",
+                notify: "NoteFlow - Notify Me",
+                about: "NoteFlow - About Us",
+                gallery: "NoteFlow - Gallery"
             };
             document.getElementById('currentYear').textContent = new Date().getFullYear();
+            document.title = siteBaseTitle + " - Windows Study App"; // Default title
 
             const mainUrl = (window.location.origin + window.location.pathname).replace(/\/$/, "");
             const mainStructuredDataScript = document.getElementById('structured-data-main');
@@ -369,7 +370,7 @@
                     content.classList.remove('active');
                 });
                 
-                let pageTitle = siteBaseTitle; 
+                let pageTitle = siteBaseTitle + " - Windows Study App"; 
                 const targetPage = document.getElementById(pageId);
                 if (targetPage) {
                     targetPage.classList.add('active');
