@@ -24,8 +24,19 @@
         "@type": "Offer",
         "price": "5.00",
         "priceCurrency": "USD",
-        "availability": "https://schema.org/ComingSoon"
+        "availability": "https://schema.org/ComingSoon",
+        "priceValidUntil": "2029-12-31",
+        "seller": {
+            "@type": "Organization",
+            "name": "NoteFlow Team"
+         }
       },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "0",
+        "reviewCount": "0"
+      },
+      "review": [],
       "mainEntityOfPage": {
          "@type": "WebPage",
          "@id": "YOUR_MAIN_URL_HERE#home" 
@@ -118,10 +129,10 @@
                                 <div class="flashcard-inner">
                                     <div class="flashcard-front shadow-md bg-slate-100 text-slate-800 border border-slate-300">
                                         <p class="text-gray-500 text-xs mb-2 uppercase tracking-wider">Subject: CompSci</p>
-                                        <h4 class="text-lg font-semibold text-slate-800">CPU Primary Function?</h4>
+                                        <h4 class="text-lg font-semibold text-slate-800 !bg-transparent">CPU Primary Function?</h4>
                                     </div>
-                                    <div class="flashcard-back shadow-md bg-indigo-100 text-indigo-700 border border-indigo-300">
-                                        <h4 class="text-lg font-semibold text-indigo-700">Execute program instructions.</h4>
+                                    <div class="flashcard-back shadow-md bg-indigo-100 border border-indigo-300">
+                                        <h4 class="text-lg font-semibold text-indigo-700 !bg-transparent">Execute program instructions.</h4>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +191,20 @@
                 "description": "Lifetime access to NoteFlow with all features included.",
                 "image": "YOUR_APP_ICON_OR_LOGO_URL_HERE", 
                 "brand": { "@type": "Brand", "name": "NoteFlow" },
-                "offers": { "@type": "Offer", "price": "5.00", "priceCurrency": "USD", "availability": "https://schema.org/ComingSoon", "seller": { "@type": "Organization", "name": "NoteFlow Team" } }
+                "offers": { 
+                    "@type": "Offer", 
+                    "price": "5.00", 
+                    "priceCurrency": "USD", 
+                    "availability": "https://schema.org/ComingSoon",
+                    "priceValidUntil": "2029-12-31",
+                    "seller": { "@type": "Organization", "name": "NoteFlow Team" } 
+                },
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "0",
+                    "reviewCount": "0"
+                },
+                "review": []
               }
             }
             </script>
@@ -310,7 +334,7 @@
                 gallery: "NoteFlow - Gallery"
             };
             document.getElementById('currentYear').textContent = new Date().getFullYear();
-            document.title = siteBaseTitle + " - Windows Study App"; // Default title
+            document.title = siteBaseTitle + " - Windows Study App"; 
 
             const mainUrl = (window.location.origin + window.location.pathname).replace(/\/$/, "");
             const mainStructuredDataScript = document.getElementById('structured-data-main');
