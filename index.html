@@ -6,6 +6,15 @@
     <title>NoteFlow - Windows Study App</title>
     <meta name="description" content="NoteFlow is the all-in-one Windows study app with organized notes, to-do lists, flashcards, Pomodoro timer, and mindfulness features. Sign up to get notified at launch!">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="canonical" href="https://www.noteflow.software/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GE9MD4TXG5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GE9MD4TXG5');
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +28,7 @@
       "name": "NoteFlow",
       "applicationCategory": "ProductivityApplication",
       "operatingSystem": "Windows",
-      "image": "https://www.noteflow.software/noteflow logo.png", 
+      "image": "https://www.noteflow.software/noteflow-logo.png", 
       "description": "NoteFlow is the all-in-one Windows study app with organized notes, to-do lists, flashcards, Pomodoro timer, and mindfulness features. Streamline your studies and boost your productivity.",
       "offers": {
         "@type": "Offer",
@@ -50,6 +59,7 @@
                 <div class="hidden md:flex items-center space-x-1">
                     <a href="index.html" data-page-link="home" class="nav-link px-3 py-2 text-gray-700">Home</a>
                     <a href="pricing.html" data-page-link="pricing" class="nav-link px-3 py-2 text-gray-700">Pricing</a>
+                    <a href="ai-features.html" data-page-link="ai" class="nav-link px-3 py-2 text-gray-700">AI Features</a>
                     <a href="notify.html" data-page-link="notify" class="nav-link px-3 py-2 text-gray-700">Notify Me</a>
                     <a href="about.html" data-page-link="about" class="nav-link px-3 py-2 text-gray-700">About</a>
                     <a href="gallery.html" data-page-link="gallery" class="nav-link px-3 py-2 text-gray-700">Gallery</a>
@@ -69,6 +79,7 @@
         <div id="mobile-menu" class="md:hidden bg-white shadow-lg border-t border-gray-200">
             <a href="index.html" data-page-link="home" class="block nav-link text-left py-3 px-4 border-b border-gray-100 hover:bg-indigo-50 text-gray-700">Home</a>
             <a href="pricing.html" data-page-link="pricing" class="block nav-link text-left py-3 px-4 border-b border-gray-100 hover:bg-indigo-50 text-gray-700">Pricing</a>
+            <a href="ai-features.html" data-page-link="ai" class="block nav-link text-left py-3 px-4 border-b border-gray-100 hover:bg-indigo-50 text-gray-700">AI Features</a>
             <a href="notify.html" data-page-link="notify" class="block nav-link text-left py-3 px-4 border-b border-gray-100 hover:bg-indigo-50 text-gray-700">Notify Me</a>
             <a href="about.html" data-page-link="about" class="block nav-link text-left py-3 px-4 border-b border-gray-100 hover:bg-indigo-50 text-gray-700">About</a>
             <a href="gallery.html" data-page-link="gallery" class="block nav-link text-left py-3 px-4 hover:bg-indigo-50 text-gray-700">Gallery</a>
@@ -189,21 +200,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const siteBaseTitle = "NoteFlow";
             document.getElementById('currentYear').textContent = new Date().getFullYear();
-            document.title = siteBaseTitle + " - Windows Study App"; 
-
-            const mainUrl = (window.location.origin + window.location.pathname).replace(/\/index.html$/, "").replace(/\/$/, "");
-            const mainStructuredDataScript = document.getElementById('structured-data-main');
-            if (mainStructuredDataScript) {
-                 try {
-                    const mainJsonLd = JSON.parse(mainStructuredDataScript.textContent);
-                    if(mainJsonLd.mainEntityOfPage) mainJsonLd.mainEntityOfPage['@id'] = mainUrl + '/';
-                    if(mainJsonLd.offers && mainJsonLd.offers.seller && mainJsonLd.offers.seller.url) mainJsonLd.offers.seller.url = mainUrl;
-                     if(mainJsonLd.image) mainJsonLd.image = mainUrl + '/noteflow-logo.png'; // Assuming logo is in root
-                    mainStructuredDataScript.textContent = JSON.stringify(mainJsonLd);
-                } catch (e) { console.error("Error parsing main structured data", e); }
-            }
             
             const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
             const revealObserver = new IntersectionObserver((entries) => {
@@ -224,9 +221,6 @@
             const menuIconClose = document.getElementById('menu-icon-close');
             let studyChartInstance = null; 
 
-            document.documentElement.classList.add('light'); 
-            document.documentElement.classList.remove('dark');
-
             if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose) {
                 mobileMenuButton.addEventListener('click', () => {
                     const isOpen = mobileMenu.classList.toggle('open');
@@ -236,20 +230,15 @@
                 });
             }
             
-            // Active Nav Link Highlighting for MPA
             const currentPath = window.location.pathname.split("/").pop() || "index.html";
             document.querySelectorAll('.nav-link').forEach(link => {
-                const linkPath = link.getAttribute('href').split("/").pop();
-                if (linkPath === currentPath) {
+                const linkPath = link.getAttribute('href');
+                if (linkPath === currentPath || (currentPath === "" && linkPath === "index.html")) {
                     link.classList.add('active');
                     link.setAttribute('aria-current', 'page');
-                } else {
-                    link.classList.remove('active');
-                    link.removeAttribute('aria-current');
                 }
             });
             
-            // Home page specific interactions
             if (currentPath === "index.html" || currentPath === "") {
                 const todoItems = document.querySelectorAll('.todo-item');
                 const progressBar = document.getElementById('progress-bar');
@@ -390,4 +379,3 @@
     </script>
 </body>
 </html>
-
