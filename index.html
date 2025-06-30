@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoteFlow - Windows Study App</title>
+    <title>NoteFlow - The Ultimate Study App for Windows</title>
     <meta name="description" content="NoteFlow is the all-in-one Windows study app with organized notes, to-do lists, flashcards, Pomodoro timer, and mindfulness features. Sign up to get notified at launch!">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="canonical" href="https://www.noteflow.software/" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GE9MD4TXG5"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -87,29 +86,32 @@
     </nav>
 
     <div id="page-container" class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <header class="text-center py-12 md:py-16 scroll-reveal">
-            <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-5 text-gray-900">
-                <span class="hero-title-gradient">Ditch the Study Chaos.</span><br>
-                <span class="block text-indigo-600 mt-2 md:mt-3">Unleash Your Genius with NoteFlow.</span>
-            </h1>
-            <p class="text-base font-semibold uppercase tracking-wider text-indigo-500 mb-6">Exclusively for Windows</p>
-            <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-700 mb-12">
-                Is your brain drowning in scattered notes and endless to-do lists? It's time to stop surviving your studies and start conquering them. NoteFlow is the all-in-one Windows command center for academic victory.
-            </p>
-            <button id="main-cta-button" class="btn-coming-soon">NoteFlow - Coming Soon!</button>
-            <p class="notify-prompt">Be the first to know! <a href="notify.html" data-page-link="notify" class="text-indigo-600 hover:text-indigo-700">Sign up for launch updates!</a></p>
+        <header class="text-center py-16 md:py-20 relative">
+            <div class="hero-bg"></div>
+            <div class="scroll-reveal">
+                <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-5 text-gray-900">
+                    <span class="hero-title-gradient">Stop Juggling. Start Dominating.</span><br>
+                    <span class="block text-indigo-600 mt-2 md:mt-3">Your Ultimate Study Command Center.</span>
+                </h1>
+                <p class="text-base font-semibold uppercase tracking-wider text-indigo-500 mb-6">Exclusively for Windows</p>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-700 mb-12">
+                    Tired of scattered notes and endless to-do lists? NoteFlow is the powerful, all-in-one Windows app engineered to bring order to your academic chaos and unlock your full potential.
+                </p>
+                <button id="main-cta-button" class="btn-coming-soon">NoteFlow - Coming Soon!</button>
+                <p class="notify-prompt">Be the first to know! <a href="notify.html" data-page-link="notify" class="text-indigo-600 hover:text-indigo-700">Sign up for launch updates!</a></p>
+            </div>
         </header>
 
         <main>
             <section id="features-showcase" class="py-12 md:py-16 scroll-reveal">
                 <div class="text-center mb-16">
-                    <h2 class="section-title">Your Integrated Academic Toolkit</h2>
-                    <p class="section-subtitle">Explore how NoteFlow replaces clutter with clarity on your Windows PC. All features, one powerful app.</p>
+                    <h2 class="section-title">The Complete Arsenal for Academic Victory</h2>
+                    <p class="section-subtitle">NoteFlow integrates every tool you need into one seamless, powerful workflow. No more app-switching, just pure focus.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     <div id="notes-feature" class="feature-section flex flex-col scroll-reveal">
-                        <div class="mb-4 text-3xl">🗒️</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Unmatched Note Organization</h3>
-                        <p class="text-gray-600 mb-6 flex-grow">Say goodbye to messy files. Structure notes by subject and topic, finding anything in seconds.</p>
+                        <div class="mb-4 text-3xl">🗂️</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Intelligent Note Organization</h3>
+                        <p class="text-gray-600 mb-6 flex-grow">Forge a fortress of knowledge. Structure your notes by subject and topic, making every detail instantly accessible.</p>
                         <div class="bg-slate-100 border-slate-200 p-6 rounded-lg shadow-sm mt-auto">
                             <ul class="space-y-2"><li class="font-semibold text-lg text-slate-700">▾ Subjects</li>
                                 <ul class="pl-6 space-y-1 text-slate-600"><li class="bg-indigo-100 p-3 rounded-md font-semibold text-indigo-700">▾ Mathematics</li>
@@ -119,16 +121,16 @@
                         </div>
                     </div>
                     <div id="todos-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.1s;">
-                        <div class="mb-4 text-3xl">✅</div><h3 class="text-2xl font-bold mb-3 text-gray-800">A To-Do List That Works</h3>
-                        <p class="text-gray-600 mb-6 flex-grow">Break down projects, track progress, and never miss a deadline. Watch the bar update!</p>
+                        <div class="mb-4 text-3xl">🎯</div><h3 class="text-2xl font-bold mb-3 text-gray-800">High-Performance Task Engine</h3>
+                        <p class="text-gray-600 mb-6 flex-grow">Conquer your workload with precision. Break down massive projects into sub-tasks and track your progress to completion.</p>
                         <div class="mt-auto"><div class="mb-4"><label class="block text-sm font-medium text-gray-700 mb-1">Project Progress</label><div class="w-full bg-gray-200 rounded-full h-5"><div id="progress-bar" class="bg-indigo-500 h-5 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div></div></div>
                             <div class="space-y-3"><div class="bg-slate-50 p-3 rounded-lg border border-slate-200 todo-item-container"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500"><span class="ml-3 text-gray-700">History Essay</span></label><div class="pl-8 mt-1 text-xs space-y-1"><label class="flex items-center todo-item-container"><input type="checkbox" class="todo-item h-4 w-4 rounded border-gray-300 text-indigo-600"><span class="ml-2 text-gray-500">Research</span></label><label class="flex items-center todo-item-container"><input type="checkbox" class="todo-item h-4 w-4 rounded border-gray-300 text-indigo-600"><span class="ml-2 text-gray-500">Outline</span></label></div></div>
                             <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 todo-item-container"><label class="flex items-center"><input type="checkbox" class="todo-item h-5 w-5 rounded border-gray-300 text-indigo-600"><span class="ml-3 text-gray-700">Calculus Exam Prep</span></label></div></div>
                         </div>
                     </div>
                     <div id="flashcards-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.2s;">
-                        <div class="mb-4 text-3xl">🧠</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Revision on Autopilot</h3>
-                        <p class="text-gray-600 mb-6 flex-grow">Turn notes into revision tools. Create flashcards to lock in concepts. Click to flip!</p>
+                        <div class="mb-4 text-3xl">🧠</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Active Recall Engine</h3>
+                        <p class="text-gray-600 mb-6 flex-grow">Forge knowledge that sticks. Convert your notes into powerful flashcards and master concepts with active recall.</p>
                         <div id="flashcard-demo" class="flashcard h-56 w-full max-w-sm mx-auto cursor-pointer perspective-1000 mt-auto">
                             <div class="flashcard-inner">
                                 <div class="flashcard-front shadow-md bg-slate-100 text-slate-800 border border-slate-300">
@@ -142,13 +144,13 @@
                         </div>
                     </div>
                     <div id="timer-feature" class="feature-section flex flex-col scroll-reveal" style="transition-delay: 0.05s;">
-                        <div class="mb-4 text-3xl">⏱️</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Harness Deep Focus</h3>
-                        <p class="text-gray-600 mb-6 flex-grow">Use the Pomodoro Technique for focused sprints. Eliminate distractions, get more done.</p>
+                        <div class="mb-4 text-3xl">⏱️</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Deep Focus Timer</h3>
+                        <p class="text-gray-600 mb-6 flex-grow">Command your concentration. Use the Pomodoro timer to work in targeted sprints and eliminate distractions.</p>
                         <div id="pomodoro-card" class="text-center bg-slate-100 p-6 rounded-xl border border-slate-200 shadow-sm mt-auto"><div id="pomodoro-display" class="text-5xl font-bold text-indigo-600 mb-3 tabular-nums">25:00</div><p id="pomodoro-status" class="text-gray-600 mb-4 text-sm">Ready to focus?</p><button id="pomodoro-btn" class="bg-indigo-600 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Start Focus</button></div>
                     </div>
                     <div id="mindfulness-feature" class="feature-section flex flex-col col-span-1 md:col-span-2 lg:col-span-1 scroll-reveal" style="transition-delay: 0.15s;">
-                         <div class="mb-4 text-3xl">🧘</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Find Your Calm Center</h3>
-                        <p class="text-gray-600 mb-6 flex-grow">Academic pressure is real. Reset with a simple breathing exercise. Your brain will thank you.</p>
+                         <div class="mb-4 text-3xl">🧘</div><h3 class="text-2xl font-bold mb-3 text-gray-800">Mindfulness Mode</h3>
+                        <p class="text-gray-600 mb-6 flex-grow">Peak performance requires rest. Center your mind and reduce stress with guided breathing exercises.</p>
                         <div class="text-center bg-slate-100 p-6 rounded-xl border border-slate-200 shadow-sm mt-auto flex flex-col items-center justify-center min-h-[240px]"><div id="breathing-circle" class="breathing-circle mb-6"></div><p id="breathing-text" class="text-gray-600 mb-5 text-sm">Inhale... Exhale...</p<button id="mindfulness-btn" class="bg-indigo-600 text-white font-medium py-2 px-5 rounded-lg hover:bg-indigo-700 transition-colors duration-300 shadow-sm hover:shadow-md text-sm">Begin Breathing</button></div>
                     </div>
                 </div>
