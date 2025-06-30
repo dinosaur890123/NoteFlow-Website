@@ -7,6 +7,35 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Animated background for hero */
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+.hero-bg::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background-image: radial-gradient(circle, rgba(79, 70, 229, 0.1) 1px, transparent 1px);
+    background-size: 2rem 2rem;
+    animation: moveGrid 30s linear infinite;
+}
+@keyframes moveGrid {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-50%, -50%); }
+}
+
+
 .page-content { display: none; animation: fadeInPage 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
 .page-content.active { display: block; }
 @keyframes fadeInPage { 0% { opacity: 0; transform: translateY(25px); } 100% { opacity: 1; transform: translateY(0); } }
@@ -100,5 +129,3 @@ body {
 .iframe-container { position: relative; overflow: hidden; width: 100%; padding-top: 75%; max-width: 700px; margin-left: auto; margin-right: auto; border-radius: 0.75rem; background-color: #ffffff; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
 .iframe-container iframe { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: none; }
 @media (max-width: 640px) { .iframe-container { padding-top: 100%; } }
-
-/* Removed theme toggle button styles as dark mode is removed */
