@@ -144,7 +144,7 @@ body {
     padding-left: 2.5rem;
 }
 .how-it-works-step:not(:last-child) {
-    padding-bottom: 2.5rem;
+    padding-bottom: 4rem; /* Increased spacing between steps */
 }
 .how-it-works-step:not(:last-child)::before {
     content: '';
