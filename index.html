@@ -294,6 +294,75 @@
                     options: getChartOptions() 
                 });
             }
+
+            // Konami Code Easter Egg
+            const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+            let konamiIndex = 0;
+            document.addEventListener('keydown', (e) => {
+                if (e.key === konamiCode[konamiIndex]) {
+                    konamiIndex++;
+                    if (konamiIndex === konamiCode.length) {
+                        triggerEasterEgg();
+                        konamiIndex = 0;
+                    }
+                } else {
+                    konamiIndex = 0;
+                }
+            });
+
+            function triggerEasterEgg() {
+                if (document.getElementById('matrix-canvas')) return;
+
+                const canvas = document.createElement('canvas');
+                canvas.id = 'matrix-canvas';
+                canvas.className = 'matrix-canvas';
+                document.body.appendChild(canvas);
+                
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+
+                const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+                const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const nums = '0123456789';
+                const alphabet = katakana + latin + nums;
+
+                const fontSize = 16;
+                const columns = canvas.width / fontSize;
+                const rainDrops = [];
+                for (let x = 0; x < columns; x++) {
+                    rainDrops[x] = 1;
+                }
+
+                let animationFrame;
+                const draw = () => {
+                    ctx.fillStyle = 'rgba(13, 17, 23, 0.05)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = '#8867ff';
+                    ctx.font = fontSize + 'px monospace';
+
+                    for (let i = 0; i < rainDrops.length; i++) {
+                        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                            rainDrops[i] = 0;
+                        }
+                        rainDrops[i]++;
+                    }
+                    animationFrame = requestAnimationFrame(draw);
+                };
+
+                setTimeout(() => canvas.classList.add('active'), 10);
+                draw();
+
+                setTimeout(() => {
+                    canvas.classList.remove('active');
+                    setTimeout(() => {
+                        cancelAnimationFrame(animationFrame);
+                        document.body.removeChild(canvas);
+                    }, 500);
+                }, 6000);
+            }
         });
     </script>
 </body>
