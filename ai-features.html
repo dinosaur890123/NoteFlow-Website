@@ -79,19 +79,30 @@
             <div class="max-w-4xl mx-auto px-4 scroll-reveal">
                 <h1 class="page-title text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">The Future of Studying is Intelligent</h1>
                 <p class="page-text">
-                    Get ready for a revolutionary suite of AI-powered features designed to supercharge your learning and productivity. 
+                    Get ready for a revolutionary suite of AI-powered features designed to supercharge your learning. 
                     We're integrating cutting-edge AI directly into NoteFlow to help you study smarter, not harder.
                 </p>
-                <div class="bg-gradient-to-tr from-slate-900 via-gray-800 to-slate-900 p-8 md:p-12 rounded-xl shadow-2xl text-center min-h-[400px] flex flex-col justify-center items-center border border-indigo-500/20 transform hover:scale-102 transition-transform duration-500 ease-out relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-                    <span class="text-7xl mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 gallery-placeholder-text" style="animation-duration: 4s;">🧠✨</span>
-                    <p class="text-3xl text-gray-100 font-semibold gallery-placeholder-text" style="animation-delay: 0.2s; animation-duration: 4s;">AI Features Coming Soon!</p>
-                    <div class="mt-6 text-left text-indigo-200 max-w-md mx-auto space-y-2">
-                         <p class="flex items-center"><span class="mr-2 text-lg">⚡</span> Automated Flashcard Generation</p>
-                         <p class="flex items-center"><span class="mr-2 text-lg">📝</span> Smart Note Summaries</p>
-                         <p class="flex items-center"><span class="mr-2 text-lg">🤖</span> AI-Powered Study Planner</p>
+            </div>
+            
+            <div class="mt-12 scroll-reveal">
+                <div class="glass-card p-8">
+                    <h2 class="text-2xl font-bold text-white mb-4">AI Generation Demo</h2>
+                    <p class="text-gray-400 mb-6">Paste your notes below, or use our sample text, and click "Generate" to see how NoteFlow's AI can instantly create study materials for you.</p>
+                    
+                    <div class="mb-6">
+                        <label for="ai-input" class="block text-sm font-medium text-gray-300 mb-2">Your Notes:</label>
+                        <textarea id="ai-input" rows="8" class="ai-demo-textarea w-full p-3 rounded-lg text-sm focus:ring-2 focus:ring-accent-color transition-all"></textarea>
                     </div>
-                    <p class="text-gray-400 mt-8 text-lg gallery-placeholder-text" style="animation-delay: 0.4s; animation-duration: 4s;">Prepare for a truly intelligent study experience.</p>
+
+                    <div class="text-center">
+                        <button id="generate-btn" class="bg-accent-color text-white font-semibold py-3 px-8 rounded-lg hover:bg-purple-500 transition-all duration-300 shadow-lg hover:shadow-purple-500/40 transform hover:scale-105">
+                            <span id="generate-btn-text">✨ Generate Study Materials</span>
+                            <div id="generate-spinner" class="loading-spinner hidden mx-auto"></div>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="ai-output-container" class="mt-8 space-y-8">
                 </div>
             </div>
         </section>
@@ -108,7 +119,7 @@
             <div class="text-sm text-gray-500 mb-4">
                 <a href="#" class="hover:text-indigo-400 transition-colors mx-2">Privacy Policy</a> | 
                 <a href="#" class="hover:text-indigo-400 transition-colors mx-2">Terms of Service</a> |
-                <a href="#contact" class="hover:text-indigo-400 transition-colors mx-2">Contact Us (Placeholder)</a>
+                <a href="mailto:noteflowdev@outlook.com" class="hover:text-indigo-400 transition-colors mx-2">Contact Us</a>
             </div>
             <p class="text-gray-500 text-sm">&copy; <span id="currentYear"></span> NoteFlow. All rights reserved. The Ultimate Study App for Windows.</p>
         </div>
@@ -150,6 +161,82 @@
                     link.setAttribute('aria-current', 'page');
                 }
             });
+
+            // AI Demo Logic
+            const aiInput = document.getElementById('ai-input');
+            const generateBtn = document.getElementById('generate-btn');
+            const generateBtnText = document.getElementById('generate-btn-text');
+            const generateSpinner = document.getElementById('generate-spinner');
+            const aiOutputContainer = document.getElementById('ai-output-container');
+
+            const sampleNotes = `Photosynthesis is the process used by plants, algae, and some bacteria to convert light energy into chemical energy. This process takes place in the chloroplasts. The main inputs are carbon dioxide (CO2), water (H2O), and sunlight. The outputs are glucose (C6H12O6), which is a sugar used for energy, and oxygen (O2), which is released into the atmosphere. The chemical equation is 6CO2 + 6H2O + Light Energy → C6H12O6 + 6O2. There are two main stages: the light-dependent reactions and the light-independent reactions (Calvin Cycle).`;
+            
+            if (aiInput) {
+                aiInput.value = sampleNotes;
+            }
+
+            if (generateBtn) {
+                generateBtn.addEventListener('click', () => {
+                    generateBtnText.classList.add('hidden');
+                    generateSpinner.classList.remove('hidden');
+                    generateBtn.disabled = true;
+                    aiOutputContainer.innerHTML = '';
+
+                    setTimeout(() => {
+                        const summaryHTML = `
+                            <div class="ai-generated-card glass-card p-6" style="animation-delay: 0s;">
+                                <h3 class="text-xl font-bold text-white mb-3 pb-2">📝 AI Summary</h3>
+                                <p class="text-gray-300">Photosynthesis uses sunlight, water, and CO2 to create glucose (energy) and oxygen. It occurs in chloroplasts and has two stages: light-dependent reactions and the Calvin Cycle.</p>
+                            </div>
+                        `;
+
+                        const flashcardsHTML = `
+                            <div class="ai-generated-card glass-card p-6" style="animation-delay: 0.2s;">
+                                <h3 class="text-xl font-bold text-white mb-4 pb-2">🧠 AI Flashcards</h3>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="p-4 bg-gray-900/50 rounded-lg border border-gray-700">
+                                        <p class="font-semibold text-gray-200">Q: What are the main inputs for photosynthesis?</p>
+                                        <p class="text-indigo-300 mt-2">A: Carbon dioxide, water, and sunlight.</p>
+                                    </div>
+                                    <div class="p-4 bg-gray-900/50 rounded-lg border border-gray-700">
+                                        <p class="font-semibold text-gray-200">Q: What are the two main outputs?</p>
+                                        <p class="text-indigo-300 mt-2">A: Glucose (energy) and oxygen.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        const practiceQuestionsHTML = `
+                             <div class="ai-generated-card glass-card p-6" style="animation-delay: 0.4s;">
+                                <h3 class="text-xl font-bold text-white mb-4 pb-2">❓ AI Practice Questions</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <p class="font-semibold text-gray-200">1. Where does photosynthesis take place?</p>
+                                        <ul class="list-disc list-inside text-gray-400 mt-2 space-y-1">
+                                            <li>Mitochondria</li>
+                                            <li class="text-green-400 font-bold">Chloroplasts (Correct)</li>
+                                            <li>Nucleus</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-200">2. The light-independent reactions are also known as the...</p>
+                                        <ul class="list-disc list-inside text-gray-400 mt-2 space-y-1">
+                                            <li class="text-green-400 font-bold">Calvin Cycle (Correct)</li>
+                                            <li>Krebs Cycle</li>
+                                            <li>Citric Acid Cycle</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        aiOutputContainer.innerHTML = summaryHTML + flashcardsHTML + practiceQuestionsHTML;
+                        generateBtnText.classList.remove('hidden');
+                        generateSpinner.classList.add('hidden');
+                        generateBtn.disabled = false;
+                    }, 2000);
+                });
+            }
         });
     </script>
 </body>
