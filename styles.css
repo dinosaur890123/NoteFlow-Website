@@ -201,22 +201,16 @@ body {
 @media (min-width: 768px) { .chart-container { height: 420px; } }
 
 /* === AI DEMO STYLES === */
-.ai-demo-textarea {
-    background-color: rgba(13, 17, 23, 0.8);
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    font-family: 'Inter', sans-serif;
-}
-.ai-demo-textarea:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 15px var(--accent-glow);
-    outline: none;
-}
 .ai-generated-card {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInPage 0.6s ease-out forwards;
+    animation: aiCardReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
+@keyframes aiCardReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .ai-generated-card h3 {
     border-bottom: 1px solid var(--border-color);
 }
