@@ -1,369 +1,387 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoteFlow | AI Study Planner, Notes & To-Do App for Windows</title>
-    <meta name="description" content="Dominate your studies with NoteFlow, the ultimate all-in-one study app for Windows. Organize notes, manage tasks, create AI flashcards, and use the Pomodoro timer to study smarter. Launching late December!">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="canonical" href="https://www.noteflow.software/" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GE9MD4TXG5"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-GE9MD4TXG5');
-    </script>
+    <title>NoteFlow - Study Smarter, Stress Less, Achieve More</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css"> 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "NoteFlow",
-      "applicationCategory": "ProductivityApplication",
-      "operatingSystem": "Windows",
-      "image": "https://www.noteflow.software/NoteFlow%20Icon.png",
-      "description": "NoteFlow is the all-in-one Windows study app with organized notes, to-do lists, flashcards, Pomodoro timer, and mindfulness features. Streamline your studies and boost your productivity.",
-      "offers": {
-        "@type": "Offer",
-        "price": "5.00",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/ComingSoon",
-        "priceValidUntil": "2029-12-31",
-        "seller": {
-            "@type": "Organization",
-            "name": "NoteFlow Team"
-         }
-      },
-      "mainEntityOfPage": {
-         "@type": "WebPage",
-         "@id": "https://www.noteflow.software/" 
-      }
-    }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth;
+            background-color: #F3F4F6; /* Fallback body background */
+        }
+        .hero-bg-gradient {
+            background: linear-gradient(135deg, #E0E7FF 0%, #F0F9FF 100%); /* Lighter blue gradient */
+        }
+        .cta-button-primary {
+            @apply bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105;
+        }
+        .cta-button-secondary {
+            @apply bg-white text-blue-700 font-semibold py-3.5 px-8 rounded-full hover:bg-slate-100 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 hover:scale-105 flex items-center space-x-3 text-lg w-full sm:w-auto justify-center max-w-xs;
+        }
+        .benefit-card { /* For the new "Why NoteFlow?" section */
+            @apply bg-white p-6 rounded-2xl shadow-lg text-center transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105;
+        }
+        .benefit-icon-bg {
+            @apply inline-flex items-center justify-center w-12 h-12 mb-4 rounded-full text-white;
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); /* Blue gradient for benefit icons */
+        }
+        .feature-card {
+            @apply bg-white p-8 rounded-3xl shadow-lg transition-all duration-300 ease-in-out opacity-0 transform translate-y-10;
+        }
+        .feature-card.is-visible {
+            @apply opacity-100 translate-y-0;
+        }
+        .feature-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.1), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+        }
+        .feature-icon-bg {
+            @apply inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full text-white transition-transform duration-300 ease-in-out;
+            background: linear-gradient(135deg, #4F46E5 0%, #3B82F6 100%);
+        }
+        .feature-card:hover .feature-icon-bg {
+            transform: scale(1.1);
+        }
+        .testimonial-card {
+            @apply bg-white p-8 rounded-2xl shadow-xl relative opacity-0 transform translate-y-10;
+        }
+        .testimonial-card.is-visible {
+            @apply opacity-100 translate-y-0;
+        }
+        .nav-link {
+            @apply px-4 py-2 rounded-full text-sm font-semibold text-slate-700 hover:bg-blue-100 hover:text-blue-700 transition-all duration-200;
+        }
+        .nav-cta-button {
+             @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-full text-sm shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 hover:scale-105;
+        }
+        .form-input {
+            @apply w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out shadow-sm hover:shadow-md bg-slate-50 focus:bg-white;
+        }
+        .section-title {
+            @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 relative pb-3 opacity-0 transform translate-y-10;
+        }
+        .section-title.is-visible {
+            @apply opacity-100 translate-y-0;
+        }
+        .section-title::after {
+            content: '';
+            @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-1 bg-blue-500 rounded-full transition-all duration-500 ease-out;
+            transform: translateX(-50%) scaleX(0);
+        }
+        .section-title.is-visible::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+        .download-section-bg {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+        }
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body class="antialiased">
+<body class="bg-slate-100 text-slate-800">
 
-    <div class="background-container">
-        <div class="circle circle-1"></div>
-        <div class="circle circle-2"></div>
-    </div>
-
-    <nav class="navbar sticky top-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="index.html" class="text-2xl font-bold text-white hover:text-gray-200 transition-colors">NoteFlow</a>
-                </div>
-                <div class="hidden md:flex items-center space-x-2">
-                    <a href="index.html" data-page-link="home" class="nav-link">Home</a>
-                    <a href="pricing.html" data-page-link="pricing" class="nav-link">Pricing</a>
-                    <a href="ai-features.html" data-page-link="ai" class="nav-link">AI Features</a>
-                    <a href="notify.html" data-page-link="notify" class="nav-link">Notify Me</a>
-                    <a href="about.html" data-page-link="about" class="nav-link">About</a>
-                    <a href="gallery.html" data-page-link="gallery" class="nav-link">Gallery</a>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" aria-label="Open menu" aria-expanded="false" class="text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 p-2 rounded-md">
-                        <svg id="menu-icon-open" class="h-6 w-6 block" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
-                        <svg id="menu-icon-close" class="h-6 w-6 hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
+    <nav class="bg-white/90 backdrop-blur-lg shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-extrabold text-blue-600" id="nav-brand-name">NoteFlow</a>
+            <div class="space-x-1 sm:space-x-2 flex items-center">
+                <a href="#benefits" class="nav-link">Benefits</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#download" class="nav-cta-button">Get App</a>
             </div>
-        </div>
-        <div id="mobile-menu" class="md:hidden">
-            <a href="index.html" data-page-link="home" class="block nav-link text-left py-3 px-4 border-b border-gray-700 hover:bg-gray-700">Home</a>
-            <a href="pricing.html" data-page-link="pricing" class="block nav-link text-left py-3 px-4 border-b border-gray-700 hover:bg-gray-700">Pricing</a>
-            <a href="ai-features.html" data-page-link="ai" class="block nav-link text-left py-3 px-4 border-b border-gray-700 hover:bg-gray-700">AI Features</a>
-            <a href="notify.html" data-page-link="notify" class="block nav-link text-left py-3 px-4 border-b border-gray-700 hover:bg-gray-700">Notify Me</a>
-            <a href="about.html" data-page-link="about" class="block nav-link text-left py-3 px-4 border-b border-gray-700 hover:bg-gray-700">About</a>
-            <a href="gallery.html" data-page-link="gallery" class="block nav-link text-left py-3 px-4 hover:bg-gray-700">Gallery</a>
         </div>
     </nav>
 
-    <div id="page-container" class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <header class="text-center py-20 md:py-28 relative">
-            <div class="scroll-reveal">
-                <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-5 text-white">
-                    <span class="hero-title-gradient">End the Chaos. Command Your Studies.</span><br>
-                    <span class="block text-gray-200 mt-2 md:mt-3">The Ultimate Study OS for Windows.</span>
-                </h1>
-                <p class="text-base font-semibold uppercase tracking-wider text-indigo-400 mb-6">Exclusively for Windows</p>
-                <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-400 mb-12">
-                    Stop juggling scattered notes, endless to-do lists, and distracting apps. NoteFlow is the all-in-one command center engineered to bring precision, focus, and order to your academic life.
-                </p>
-                <button id="main-cta-button" class="btn-coming-soon">Launching Globally Late December</button>
-                <p class="notify-prompt text-gray-400 mt-4">Be the first to know! <a href="notify.html" data-page-link="notify" class="text-indigo-400 hover:text-indigo-300">Sign up for launch updates!</a></p>
+    <header class="hero-bg-gradient py-24 sm:py-32">
+        <div class="container mx-auto px-6 text-center">
+            <img src="https://placehold.co/180x180/3B82F6/FFFFFF?text=NF&font=Inter&font-size=90" alt="NoteFlow App Icon" class="mx-auto mb-10 rounded-3xl shadow-2xl w-40 h-40 sm:w-48 sm:h-48 scroll-animate" id="app-logo" onerror="this.src='https://placehold.co/180x180/CBD5E1/FFFFFF?text=LogoErr&font-size=30'">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 mb-4 scroll-animate" style="transition-delay: 0.1s;" id="app-main-headline">Elevate Your Learning with NoteFlow</h1>
+            <p class="text-xl sm:text-2xl text-slate-700 mb-12 max-w-3xl mx-auto scroll-animate" style="transition-delay: 0.2s;" id="app-tagline">Study Smarter, Stress Less, Achieve More.</p>
+            <a href="#download" class="cta-button-primary scroll-animate" style="transition-delay: 0.3s;">
+                Get Started Free
+            </a>
+        </div>
+    </header>
+
+    <section id="benefits" class="py-20 sm:py-24 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center mb-16">Why Choose NoteFlow?</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="benefit-card scroll-animate">
+                    <div class="benefit-icon-bg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-800 mb-2">All-in-One Power</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Notes, flashcards, timer, to-dos & mindfulness in one seamless app.</p>
+                </div>
+                <div class="benefit-card scroll-animate" style="transition-delay: 0.1s;">
+                    <div class="benefit-icon-bg">
+                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-800 mb-2">Boost Productivity</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Stay focused, manage your time effectively, and get more done.</p>
+                </div>
+                <div class="benefit-card scroll-animate" style="transition-delay: 0.2s;">
+                    <div class="benefit-icon-bg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-800 mb-2">Reduce Study Stress</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Built-in mindfulness tools to help you stay calm and centered.</p>
+                </div>
+                <div class="benefit-card scroll-animate" style="transition-delay: 0.3s;">
+                    <div class="benefit-icon-bg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-800 mb-2">Achieve Your Goals</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Organize your studies, track progress, and conquer your exams.</p>
+                </div>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <main>
-            <section id="how-it-works" class="py-12 md:py-16 scroll-reveal">
-                <div class="text-center mb-16">
-                    <h2 class="section-title">From Chaos to Clarity in 3 Steps</h2>
+    <section id="features" class="py-20 sm:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center mb-20">Features Designed for Your Success</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 text-center" id="features-list">
+                <div class="feature-card scroll-animate">
+                    <div class="feature-icon-bg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-3">Smart Note Organization</h3>
+                    <p class="text-slate-600 leading-relaxed">Effortlessly structure notes by subject & topic. Find information instantly and keep your study materials perfectly ordered.</p>
                 </div>
-                <div class="max-w-5xl mx-auto md:flex md:space-x-8">
-                    <div class="how-it-works-step">
-                        <div class="step-number">1</div>
-                        <h3 class="text-2xl font-bold mb-2 text-white">Centralize Your Intel</h3>
-                        <p class="text-gray-400">Consolidate every note, idea, and deadline into one structured knowledge base. No more lost information.</p>
+                <div class="feature-card scroll-animate" style="transition-delay: 0.1s;">
+                     <div class="feature-icon-bg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                     </div>
-                    <div class="how-it-works-step">
-                        <div class="step-number">2</div>
-                        <h3 class="text-2xl font-bold mb-2 text-white">Engineer Your Success</h3>
-                        <p class="text-gray-400">Use the high-performance to-do list and AI Planner to build a strategic roadmap for every project and exam.</p>
-                    </div>
-                    <div class="how-it-works-step">
-                        <div class="step-number">3</div>
-                        <h3 class="text-2xl font-bold mb-2 text-white">Master and Conquer</h3>
-                        <p class="text-gray-400">Leverage the Deep Focus Timer, AI-generated flashcards, and practice exams to make knowledge permanent and ace your tests.</p>
-                    </div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-3">Dynamic Flashcards</h3>
+                    <p class="text-slate-600 leading-relaxed">Create & customize flashcards to master key concepts. Actively test your knowledge and significantly boost memory retention.</p>
                 </div>
-            </section>
-
-            <section id="features-showcase" class="py-12 md:py-16 scroll-reveal">
-                <div class="text-center mb-16">
-                    <h2 class="section-title">The Complete Arsenal for Academic Victory</h2>
-                    <p class="section-subtitle">NoteFlow integrates every tool you need into one seamless, powerful workflow. No more app-switching, just pure focus.</p>
+                <div class="feature-card scroll-animate" style="transition-delay: 0.2s;">
+                    <div class="feature-icon-bg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-3">To-Do List Tracking</h3>
+                    <p class="text-slate-600 leading-relaxed">Stay on top of tasks, assignments, and deadlines. Organize your academic life and never miss an important milestone.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                    <div class="glass-card p-8 flex flex-col items-center text-center scroll-reveal">
-                        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0A2.25 2.25 0 013.75 7.5h16.5a2.25 2.25 0 012.25 2.25m-18.75 0h18.75v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5z" /></svg></div>
-                        <h3 class="text-xl font-bold mb-2 text-white">Intelligent Note Organization</h3>
-                        <p class="text-gray-400 flex-grow">Forge a fortress of knowledge. Structure your notes by subject and topic, making every detail instantly accessible.</p>
+                <div class="feature-card scroll-animate" style="transition-delay: 0.3s;">
+                    <div class="feature-icon-bg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
-                    <div class="glass-card p-8 flex flex-col items-center text-center scroll-reveal" style="transition-delay: 0.1s;">
-                        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
-                        <h3 class="text-xl font-bold mb-2 text-white">High-Performance Task Engine</h3>
-                        <p class="text-gray-400 flex-grow">Conquer your workload with precision. Break down massive projects into sub-tasks and track your progress to completion.</p>
-                    </div>
-                    <div class="glass-card p-8 flex flex-col items-center text-center scroll-reveal" style="transition-delay: 0.2s;">
-                        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v8.25A2.25 2.25 0 006 16.5h2.25m8.25-8.25H18a2.25 2.25 0 012.25 2.25v8.25A2.25 2.25 0 0118 18.75h-5.25m-8.25-8.25h5.25" /></svg></div>
-                        <h3 class="text-xl font-bold mb-2 text-white">AI-Generated Flashcards</h3>
-                        <p class="text-gray-400 flex-grow">Turn your notes into intelligent flashcards instantly. Our AI identifies key concepts so you can master them with active recall.</p>
-                    </div>
-                    <div class="glass-card p-8 flex flex-col items-center text-center scroll-reveal" style="transition-delay: 0.05s;">
-                        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
-                        <h3 class="text-xl font-bold mb-2 text-white">Deep Focus Timer</h3>
-                        <p class="text-gray-400 flex-grow">Command your concentration. Use the Pomodoro timer to work in targeted sprints and eliminate distractions.</p>
-                    </div>
-                    <div class="glass-card p-8 flex flex-col items-center text-center scroll-reveal" style="transition-delay: 0.15s;">
-                        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.528l.259 1.035a3.375 3.375 0 002.456 2.456l1.035.259-.259 1.035a3.375 3.375 0 00-2.456 2.456L18 21.75l-.259-1.035a3.375 3.375 0 00-2.456-2.456l-1.035-.259 1.035-.259a3.375 3.375 0 002.456-2.456z" /></svg></div>
-                        <h3 class="text-xl font-bold mb-2 text-white">AI Practice Exams</h3>
-                        <p class="text-gray-400 flex-grow">Simulate Exam Day. Anytime. Generate practice exams from your notes to identify weak spots and build confidence.</p>
-                    </div>
-                    <div class="glass-card p-8 flex flex-col items-center text-center scroll-reveal" style="transition-delay: 0.25s;">
-                        <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></div>
-                        <h3 class="text-xl font-bold mb-2 text-white">Mindfulness Mode</h3>
-                        <p class="text-gray-400 flex-grow">High-level focus requires strategic rest. Use guided breathing exercises to reduce stress, reset your mind, and stay in the zone.</p>
-                    </div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-3">Pomodoro Study Timer</h3>
+                    <p class="text-slate-600 leading-relaxed">Maximize focus and productivity with the integrated Pomodoro timer. Break study sessions into effective, manageable intervals.</p>
                 </div>
-            </section>
-            
-            <section id="comparison" class="py-12 md:py-16 scroll-reveal">
-                 <div class="text-center mb-12 px-6"><h2 class="section-title">Stop Juggling. Start Integrating.</h2><p class="section-subtitle">See how a typical study day changes with NoteFlow. More time focusing, less time wasted.</p></div>
-                <div class="chart-container"><canvas id="studyChart"></canvas></div>
-            </section>
-
-            <section id="purchase-section" class="text-center py-16 md:py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 rounded-xl mt-16 shadow-2xl scroll-reveal border border-indigo-500/20">
-                 <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-5 text-white">Ready to Command Your Studies?</h2>
-                <p class="max-w-3xl mx-auto text-lg md:text-xl text-indigo-200 mb-10 px-6">Invest in your academic future. Get lifetime access to every feature with a simple, one-time purchase. No subscriptions. No hidden fees.</p>
-                 <button class="btn-coming-soon-lg">Launching Globally Late Decemer</button>
-                 <p class="notify-prompt text-gray-400 mt-4"> 
-                    NoteFlow is exclusively designed for Windows.<br>
-                    Be the first to know! 
-                    <a href="notify.html" data-page-link="notify" class="text-indigo-400 hover:text-indigo-300">Sign up for launch updates!</a>
-                </p>
-            </section>
-        </main>
-    </div>
-
-    <footer class="text-center py-12 mt-8 border-t border-gray-800">
-        <div class="container mx-auto px-4">
-            <div class="mb-6">
-                <a href="#" class="social-icon" aria-label="NoteFlow on Twitter (Placeholder)">🐦</a>
-                <a href="#" class="social-icon" aria-label="NoteFlow on Facebook (Placeholder)">👍</a>
-                <a href="#" class="social-icon" aria-label="NoteFlow on Instagram (Placeholder)">📸</a>
-                 <a href="#" class="social-icon" aria-label="NoteFlow on LinkedIn (Placeholder)">🔗</a>
+                <div class="feature-card scroll-animate" style="transition-delay: 0.4s;">
+                    <div class="feature-icon-bg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-3">Mindfulness Moments</h3>
+                    <p class="text-slate-600 leading-relaxed">Take mindful breaks to reduce stress, refresh your mind, and improve concentration with short, guided exercises.</p>
+                </div>
+                 <div class="hidden lg:block lg:col-span-1"></div>
             </div>
-            <div class="text-sm text-gray-500 mb-4">
-                <a href="mailto:noteflowdev@outlook.com" class="hover:text-indigo-400 transition-colors mx-2">Contact Us</a>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-20 sm:py-24 bg-slate-100">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center mb-20">Loved by Students Like You</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="testimonials-list">
+                <div class="testimonial-card scroll-animate">
+                    <svg class="absolute top-6 left-6 w-10 h-10 text-blue-200 opacity-50" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                        <path d="M9.333 6.167C6.066 6.167 3.333 8.9 3.333 12.167c0 1.61.645 3.071 1.691 4.116l-1.691 4.736 4.736-1.691A7.963 7.963 0 0012.167 21c3.267 0 5.999-2.734 5.999-5.999S15.433 6.167 12.167 6.167H9.333zM25.333 6.167c-3.267 0-6 2.733-6 5.999 0 1.61.645 3.071 1.691 4.116l-1.691 4.736 4.736-1.691A7.963 7.963 0 0028.167 21c3.267 0 5.999-2.734 5.999-5.999S31.433 6.167 28.167 6.167H25.333z"></path>
+                    </svg>
+                    <p class="text-slate-700 mb-6 leading-relaxed relative z-10 pt-8">"NoteFlow's organization tools are a lifesaver! My notes are finally tidy, and the to-do list keeps me on track. My grades have definitely seen a boost!"</p>
+                    <p class="font-semibold text-slate-800 text-right">- Alex P., High School Student</p>
+                </div>
+                <div class="testimonial-card scroll-animate" style="transition-delay: 0.1s;">
+                     <svg class="absolute top-6 left-6 w-10 h-10 text-blue-200 opacity-50" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                        <path d="M9.333 6.167C6.066 6.167 3.333 8.9 3.333 12.167c0 1.61.645 3.071 1.691 4.116l-1.691 4.736 4.736-1.691A7.963 7.963 0 0012.167 21c3.267 0 5.999-2.734 5.999-5.999S15.433 6.167 12.167 6.167H9.333zM25.333 6.167c-3.267 0-6 2.733-6 5.999 0 1.61.645 3.071 1.691 4.116l-1.691 4.736 4.736-1.691A7.963 7.963 0 0028.167 21c3.267 0 5.999-2.734 5.999-5.999S31.433 6.167 28.167 6.167H25.333z"></path>
+                    </svg>
+                    <p class="text-slate-700 mb-6 leading-relaxed relative z-10 pt-8">"The Pomodoro timer and flashcards are fantastic. I'm way more focused during study sessions and actually remember what I learn. So much better than my old methods!"</p>
+                    <p class="font-semibold text-slate-800 text-right">- Jamie L., College Freshman</p>
+                </div>
+                <div class="testimonial-card scroll-animate" style="transition-delay: 0.2s;">
+                     <svg class="absolute top-6 left-6 w-10 h-10 text-blue-200 opacity-50" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                        <path d="M9.333 6.167C6.066 6.167 3.333 8.9 3.333 12.167c0 1.61.645 3.071 1.691 4.116l-1.691 4.736 4.736-1.691A7.963 7.963 0 0012.167 21c3.267 0 5.999-2.734 5.999-5.999S15.433 6.167 12.167 6.167H9.333zM25.333 6.167c-3.267 0-6 2.733-6 5.999 0 1.61.645 3.071 1.691 4.116l-1.691 4.736 4.736-1.691A7.963 7.963 0 0028.167 21c3.267 0 5.999-2.734 5.999-5.999S31.433 6.167 28.167 6.167H25.333z"></path>
+                    </svg>
+                    <p class="text-slate-700 mb-6 leading-relaxed relative z-10 pt-8">"Exam season used to be so stressful, but the mindfulness feature in NoteFlow really helps me stay calm and focused. It's a total game-changer for student well-being."</p>
+                    <p class="font-semibold text-slate-800 text-right">- Casey M., University Student</p>
+                </div>
             </div>
-            <p class="text-gray-500 text-sm">&copy; <span id="currentYear"></span> NoteFlow. All rights reserved. The Ultimate Study App for Windows.</p>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 sm:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center mb-12">About NoteFlow</h2>
+            <p class="text-lg text-slate-700 max-w-3xl mx-auto text-center leading-relaxed scroll-animate" id="about-text">
+                NoteFlow was born from a simple idea: studying should be smarter, not harder. We are passionate about creating tools that empower students to learn efficiently, stay organized, and maintain their well-being. Our mission is to provide an intuitive, all-in-one platform that adapts to your unique learning style and helps you achieve your academic goals. We believe in the power of focused learning and a calm mind.
+            </p>
+        </div>
+    </section>
+
+    <section id="download" class="py-24 sm:py-32 download-section-bg text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-8 scroll-animate">Ready to Revolutionize Your Study Routine?</h2>
+            <p class="text-xl sm:text-2xl mb-12 max-w-3xl mx-auto text-blue-100 scroll-animate" style="transition-delay: 0.1s;">Join students already acing their studies with NoteFlow. Download now and unlock your full academic potential!</p>
+            <div class="flex flex-col items-center justify-center space-y-6 scroll-animate" style="transition-delay: 0.2s;" id="download-buttons">
+                <a href="#" class="cta-button-secondary">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M0 3.375C0 2.339.84 1.5 1.875 1.5H7.5V12H0V3.375zM0 12V20.625c0 1.036.84 1.875 1.875 1.875H7.5V12H0zm8.625-10.5H15V12H8.625V1.5zm0 10.5H15V22.5H8.625V12zM16.125 1.5H22.5c1.035 0 1.875.84 1.875 1.875V12H16.125V1.5zm0 10.5H22.5V20.625c0 1.035-.84 1.875-1.875 1.875H16.125V12z"/>
+                    </svg>
+                    <span>Get it on Microsoft Store</span>
+                </a>
+                <p class="text-blue-200 text-base">Coming soon to other platforms!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 sm:py-24 bg-slate-100">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center mb-12">Get in Touch</h2>
+            <p class="text-lg text-slate-700 max-w-xl mx-auto text-center mb-16 scroll-animate">
+                Have questions, feedback, or brilliant ideas? We'd love to hear from you!
+            </p>
+            <form class="max-w-xl mx-auto bg-white p-8 sm:p-12 rounded-3xl shadow-2xl scroll-animate" style="transition-delay: 0.1s;">
+                <div class="mb-6">
+                    <label for="name" class="block text-slate-800 font-semibold mb-2 text-sm">Full Name</label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="e.g., Alex Ryder" required>
+                </div>
+                <div class="mb-6">
+                    <label for="email" class="block text-slate-800 font-semibold mb-2 text-sm">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-8">
+                    <label for="message" class="block text-slate-800 font-semibold mb-2 text-sm">Your Message</label>
+                    <textarea id="message" name="message" rows="5" class="form-input" placeholder="Tell us anything..." required></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="cta-button-primary w-full sm:w-auto">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+            <div id="form-status" class="mt-8 text-center text-lg"></div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-16">
+        <div class="container mx-auto px-6 text-center">
+            <a href="#" class="text-3xl font-extrabold text-blue-500 mb-4 inline-block" id="footer-brand-name">NoteFlow</a>
+            <p class="mb-6 scroll-animate">&copy; <span id="current-year">2024</span> NoteFlow. All rights reserved.</p>
+            <p class="text-sm scroll-animate" style="transition-delay: 0.1s;">Empowering students, one note at a time. Study smarter, not harder.</p>
+            <p class="mt-4 scroll-animate" style="transition-delay: 0.15s;"><a href="mailto:noteflowdev@outlook.com" class="text-blue-300 hover:text-blue-200 font-semibold">Contact the developer: noteflowdev@outlook.com</a></p>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.05 }); 
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            scrollRevealElements.forEach(el => {
-                revealObserver.observe(el);
-            });
-
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIconOpen = document.getElementById('menu-icon-open');
-            const menuIconClose = document.getElementById('menu-icon-close');
-            let studyChartInstance = null; 
-
-            if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose) {
-                mobileMenuButton.addEventListener('click', () => {
-                    const isOpen = mobileMenu.classList.toggle('open');
-                    mobileMenuButton.setAttribute('aria-expanded', isOpen.toString());
-                    menuIconOpen.classList.toggle('hidden', isOpen);
-                    menuIconClose.classList.toggle('hidden', !isOpen);
-                });
-            }
-            
-            const currentPath = window.location.pathname.split("/").pop() || "index.html";
-            document.querySelectorAll('.nav-link').forEach(link => {
-                const linkPath = link.getAttribute('href');
-                if (linkPath === currentPath || (currentPath === "" && linkPath === "index.html")) {
-                    link.classList.add('active');
-                    link.setAttribute('aria-current', 'page');
-                }
-            });
-            
-            function getChartOptions() { 
-                const gridColor = 'rgba(255, 255, 255, 0.1)';
-                const tickColor = '#8b949e';
-                const titleColor = '#c9d1d9';
-                const legendLabelColor = '#8b949e';
-
-                return {
-                    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-                    scales: { 
-                        x: { 
-                            stacked: true, 
-                            title: { display: true, text: 'Percentage of Study Time (%)', font: {size: 13, weight: '500'}, color: tickColor, padding: {top: 10} }, 
-                            grid: { display: false, drawBorder: false }, 
-                            ticks: { font: {size: 12}, color: tickColor, padding: 5} 
-                        },
-                        y: { 
-                            stacked: true, 
-                            grid: { color: gridColor, borderDash: [2, 2] }, 
-                            ticks: { font: {size: 13, weight: '500'}, color: tickColor, padding: 10} 
+        // --- Smooth Scrolling for Navigation Links ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const hrefAttribute = this.getAttribute('href');
+                if (hrefAttribute && hrefAttribute.startsWith('#') && hrefAttribute.length > 1) {
+                    try {
+                        const targetElement = document.querySelector(hrefAttribute);
+                        if (targetElement) {
+                            e.preventDefault(); 
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start' 
+                            });
                         }
-                    },
-                    plugins: { 
-                        tooltip: { 
-                            backgroundColor: '#0d1117', 
-                            titleColor: '#c9d1d9',
-                            bodyColor: '#c9d1d9',
-                            titleFont: { size: 14, weight: '600' }, 
-                            bodyFont: { size: 12 }, padding: 12, cornerRadius: 6, displayColors: false, 
-                            callbacks: { label: function(context) { return `${context.dataset.label}: ${context.raw}%`; } } 
-                        },
-                        title: { display: true, text: 'Typical Study Session Efficiency (Windows)', font: { size: 18, weight: '700' }, color: titleColor, padding: { top: 5, bottom: 25 } },
-                        legend: { position: 'bottom', labels: { font: {size: 13}, color: legendLabelColor, padding: 25, usePointStyle: true, pointStyle: 'rectRounded' } }
-                    },
-                    layout: { padding: { top: 5, bottom: 5, left: 5, right: 5 } }
-                };
-            }
-            
-            const chartCanvas = document.getElementById('studyChart');
-            if (chartCanvas) { 
-                const ctx = chartCanvas.getContext('2d');
-                studyChartInstance = new Chart(ctx, { 
-                    type: 'bar', 
-                    data: { 
-                        labels: ['Scattered Apps Method', 'The NoteFlow Method'],
-                        datasets: [{ label: 'Focused Study Time', data: [60, 90], backgroundColor: 'rgba(136, 103, 255, 0.8)', borderColor: 'rgba(136, 103, 255, 1)', borderWidth: 1.5, borderRadius: 6, borderSkipped: false, },
-                                   { label: 'Time Wasted', data: [40, 10], backgroundColor: 'rgba(239, 68, 68, 0.6)', borderColor: 'rgba(239, 68, 68, 1)', borderWidth: 1.5, borderRadius: 6, borderSkipped: false, }]
-                    },
-                    options: getChartOptions() 
-                });
-            }
-
-            // Konami Code Easter Egg
-            const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-            let konamiIndex = 0;
-            document.addEventListener('keydown', (e) => {
-                if (e.key === konamiCode[konamiIndex]) {
-                    konamiIndex++;
-                    if (konamiIndex === konamiCode.length) {
-                        triggerEasterEgg();
-                        konamiIndex = 0;
+                    } catch (error) {
+                        console.error('Error finding element for smooth scroll:', error, 'Selector:', hrefAttribute);
                     }
-                } else {
-                    konamiIndex = 0;
+                } else if (hrefAttribute === '#') { 
+                    e.preventDefault(); 
+                    if (this.id === 'nav-brand-name' || this.id === 'footer-brand-name') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
                 }
             });
-
-            function triggerEasterEgg() {
-                if (document.getElementById('matrix-canvas')) return;
-
-                const canvas = document.createElement('canvas');
-                canvas.id = 'matrix-canvas';
-                canvas.className = 'matrix-canvas';
-                document.body.appendChild(canvas);
-                
-                const ctx = canvas.getContext('2d');
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-
-                const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-                const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                const nums = '0123456789';
-                const alphabet = katakana + latin + nums;
-
-                const fontSize = 16;
-                const columns = canvas.width / fontSize;
-                const rainDrops = [];
-                for (let x = 0; x < columns; x++) {
-                    rainDrops[x] = 1;
-                }
-
-                let animationFrame;
-                const draw = () => {
-                    ctx.fillStyle = 'rgba(13, 17, 23, 0.05)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = '#8867ff';
-                    ctx.font = fontSize + 'px monospace';
-
-                    for (let i = 0; i < rainDrops.length; i++) {
-                        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-                        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                            rainDrops[i] = 0;
-                        }
-                        rainDrops[i]++;
-                    }
-                    animationFrame = requestAnimationFrame(draw);
-                };
-
-                setTimeout(() => canvas.classList.add('active'), 10);
-                draw();
-
-                setTimeout(() => {
-                    canvas.classList.remove('active');
-                    setTimeout(() => {
-                        cancelAnimationFrame(animationFrame);
-                        document.body.removeChild(canvas);
-                    }, 500);
-                }, 6000);
-            }
         });
+
+        // --- Scroll-triggered Animations Logic ---
+        const scrollAnimatedElements = document.querySelectorAll('.scroll-animate, .benefit-card, .feature-card, .testimonial-card, .section-title'); // Added .benefit-card
+
+        const observerOptions = {
+            root: null, 
+            rootMargin: '0px',
+            threshold: 0.1 
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        };
+
+        const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+        scrollAnimatedElements.forEach(el => {
+            if (!el.classList.contains('benefit-card') && !el.classList.contains('feature-card') && !el.classList.contains('testimonial-card') && !el.classList.contains('section-title')) { // Ensure initial state class is only added once
+                 el.classList.add('scroll-animate'); // This is for elements that ONLY use .scroll-animate
+            }
+            // For cards and titles, the initial state is in their specific CSS rules (.feature-card, .testimonial-card, .section-title)
+            scrollObserver.observe(el);
+        });
+
+
+        // --- Basic Contact Form Submission Handling ---
+        const contactForm = document.querySelector('#contact form');
+        const formStatus = document.getElementById('form-status');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const nameInput = contactForm.querySelector('#name');
+                const emailInput = contactForm.querySelector('#email');
+                const messageInput = contactForm.querySelector('#message');
+                
+                let isValid = true;
+                [nameInput, emailInput, messageInput].forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('border-red-500', 'ring-red-500'); 
+                        input.classList.remove('border-slate-300');
+                    } else {
+                        input.classList.remove('border-red-500', 'ring-red-500');
+                        input.classList.add('border-slate-300');
+                    }
+                });
+
+                if (!isValid) {
+                    formStatus.innerHTML = '<p class="text-red-600 font-semibold">Please fill out all fields correctly.</p>';
+                    return;
+                }
+                
+                formStatus.innerHTML = '<p class="text-green-600 font-semibold">Thank you! Your message has been sent.</p>';
+                contactForm.reset();
+                [nameInput, emailInput, messageInput].forEach(input => {
+                     input.classList.remove('border-red-500', 'ring-red-500');
+                     input.classList.add('border-slate-300');
+                });
+            });
+        }
     </script>
+
 </body>
 </html>
